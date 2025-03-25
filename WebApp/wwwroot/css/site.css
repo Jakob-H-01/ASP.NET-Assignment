@@ -27,6 +27,7 @@ body {
 
 a {
     text-decoration: none;
+    color: var(--clr-body);
 }
 
 button {
@@ -87,12 +88,12 @@ img {
     --blue-400: #2682D9;
     --purple: #826AF9;
     --purple-dark: #634CD4;
-
+    
     --clr-background: var(--white-200);
     --clr-body: var(--dark-300);
     --clr-heading: var(--dark-600);
     --clr-logo: var(--dark-300);
-    --clr-border: var(--gray-500);
+    --clr-border: var(--gray-200);
 
     /* Typography */
     --ff-primary: 'Nunito', sans-serif;
@@ -100,7 +101,7 @@ img {
     --ff-body: var(--ff-primary);
     --ff-heading: var(--ff-primary);
     --ff-logo: var(--ff-secondary);
-
+    
     --fw-regular: 400;
     --fw-semi-bold: 600;
     --fw-bold: 700;
@@ -113,10 +114,6 @@ img {
     --fs-700: 2.4rem;
     --fs-800: 2.8rem;
     --fs-900: 3.2rem;
-
-    /* Breakpoints */
-    --tablet: 768px;
-    --desktop: 1200px;
 }
 
 /* Utility classes */
@@ -135,6 +132,29 @@ img {
 .center {
     display: grid;
     place-items: center;
+    height: 100svh;
+}
+
+.fw-semi-bold {
+    font-weight: var(--fw-semi-bold);
+}
+
+.text-blue {
+    color: var(--blue-200);
+}
+
+.flex-sb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-icon {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 1.4rem;
+    bottom: 1.4rem;
 }
 
 /* General styling */
@@ -200,13 +220,171 @@ p, h1, h2, h3, h4, h5, h6, span {
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--fw-semi-bold);
+    border: none;
+    border-radius: 0.93em;
+    padding-block: 0.93em;
+}
+
+.btn-blue {
+    background-color: var(--blue-200);
+    color: var(--white-100);
+}
+
+.btn-gray {
+    background-color: var(--white-200);
+    color: var(--dark-600);
+}
+
+.btn-form {
+    width: 100%;
+}
+
+.btn-google {
+    position: relative;
+    
+    > img {
+    position: absolute;
+    left: 1.6rem;
+    }
+}
+
+.user-form {
+    background-color: var(--white-100);
+    border-radius: 1.6rem;
+    box-shadow: 0 6px 6px 1px rgba(182, 182, 182, 0.1);
+    padding: 9.9rem 10rem 2.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60rem;
+    
+    > :first-child {
+    margin-bottom: 2.7rem;
+    }
+
+    > :last-child {
+        margin-top: 5.9rem;
+    }
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+}
+
+.input-container {
+    display: grid;
+    gap: 0.9rem;
+    position: relative;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+    
+    > input {
+    cursor: pointer;
+    opacity: 0;
+    z-index: 999;
+    }
+
+    > input:checked ~ .checkbox {
+        background-color: var(--blue-200);
+        border-color: var(--blue-200);
+    }
+
+    > input:checked ~ .checkbox::after {
+        display: block;
+    }
+
+    > input:checked ~ .checkbox::before {
+        display: block;
+    }
+}
+
+.input-field {
+    padding: 1.4rem 1.6rem;
+    border-radius: 1.4rem;
+    border: 1px solid var(--clr-border);
+    color: var(--gray-800);
+}
+
+.checkbox {
+    position: absolute;
+    left: -0.15rem;
+    border-radius: 5px;
+    border: 1px solid var(--clr-border);
+    width: 16px;
+    height: 16px;
+}
+
+.checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3.5px;
+    width: 2px;
+    height: 7px;
+    background-color: var(--white-100);
+    border-radius: 100vmax 100vmax 100vmax 0;
+    rotate: 45deg;
+}
+
+.checkbox::before {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 5.5px;
+    width: 2px;
+    height: 4px;
+    background-color: var(--white-100);
+    border-radius: 100vmax 100vmax 0 0;
+    rotate: -45deg;
+}
+
+.divider {
+    position: relative;
+    color: var(--gray-800);
+    font-size: 1.2rem;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: 43.75%;
+    background-color: var(--clr-border);
+}
+
+.divider::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 1px;
+    width: 43.75%;
+    background-color: var(--clr-border);
 }
 
 /* Tablet */
-@media (min-width: var(--tablet)) {
+@media (min-width: 768px) {
     :root {
         --fs-300: 1.4rem;
-        --fs-400: 1.6rem;
+        --fs-400: 1.5rem;
         --fs-450: 1.8rem;
         --fs-500: 2rem;
         --fs-600: 2.4rem;
@@ -217,5 +395,5 @@ p, h1, h2, h3, h4, h5, h6, span {
 }
 
 /* Desktop */
-@media (min-width: var(--desktop)) {
+@media (min-width: 1200px) {
 }

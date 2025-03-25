@@ -1,0 +1,31 @@
+﻿@{
+	Layout = "_CenterLayout";
+	ViewData["Title"] = "Login";
+}
+
+<form action="" class="user-form">
+    <h1 class="primary-heading">Login</h1>
+    <div class="form-content">
+        <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Login with Google</button>
+        <div class="divider">OR</div>
+        <div class="input-container">
+            <label class="fw-semi-bold" for="">Email</label>
+            <input class="input-field" type="email" name="" id="" placeholder="Your email address">
+        </div>
+        <div class="input-container">
+            <label class="fw-semi-bold" for="">Password</label>
+            <input class="input-field" type="password" name="" id="" placeholder="Enter your password">
+            <button class="btn-icon"><img src="~/images/hide.svg" alt=""></button>
+        </div>
+        <div class="flex-sb">
+            <div class="checkbox-container">
+                <input type="checkbox" name="" id="">
+                <span class="checkbox"></span>
+                <label for="">Remember Me</label>
+            </div>
+            <a class="text-blue" href="#">Forgot Password?</a>
+        </div>
+        <a class="btn btn-blue btn-form" href="#">Log In</a>
+    </div>
+    <a class="fw-semi-bold" asp-action="Register" asp-controller="Auth">Don't have an account? <span class="text-blue">Sign Up</span></a>
+</form>
