@@ -7,9 +7,35 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/a4670a4e55.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    @RenderBody()
+    <div class="portal-grid">
+        <header class="top-menu">
+            <div class="searchbar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="" id="" placeholder="Search anything...">
+            </div>
+            <div class="menu-options">
+                <button class="btn-icon"><i class="fa-solid fa-bell"></i></button>
+                <button class="btn-icon"><i class="fa-solid fa-gear"></i></button>
+                <div class="divider-vertical"></div>
+                <a href="#"><img src="~/images/avatar.svg" alt=""></a>
+            </div>
+        </header>
+        <main class="portal-main">
+            @RenderBody()
+        </main>
+        <aside class="side-navigation">
+            <a class="logo" asp-action="Login" asp-controller="Auth"><img src="~/images/logo.svg" alt=""><span>alpha</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a class="nav-link @(Context.Request.Path == "/projects" ? "active" : "")" asp-action="Projects" asp-controller="Projects"><i class="fa-solid fa-briefcase"></i><span>Projects</span></a></li>
+                    <li><a class="nav-link @(Context.Request.Path == "/admin/members" ? "active" : "")" asp-action="TeamMembers" asp-controller="Admin"><i class="fa-solid fa-user-group"></i><span>Team Members</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

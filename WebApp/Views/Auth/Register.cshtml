@@ -19,19 +19,19 @@
         <div class="input-container">
             <label class="fw-semi-bold" for="">Password</label>
             <input class="input-field" type="password" name="" id="" placeholder="Enter your password">
-            <button class="btn-icon"><img src="~/images/hide.svg" alt=""></button>
+            <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
         </div>
         <div class="input-container">
             <label class="fw-semi-bold" for="">Confirm Password</label>
             <input class="input-field" type="password" name="" id="" placeholder="Confirm your password">
-            <button class="btn-icon"><img src="~/images/hide.svg" alt=""></button>
+            <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
         </div>
         <div class="checkbox-container">
             <input type="checkbox" name="" id="">
             <span class="checkbox"></span>
             <label for="">I accept <a class="text-blue" href="#">Terms and Conditions</a></label>
         </div>
-        <a class="btn btn-blue btn-form" href="#">Create Account</a>
+        <a class="btn btn-blue btn-form" asp-action="Login" asp-controller="Auth">Create Account</a>
     </div>
     <a class="fw-semi-bold" asp-action="Login" asp-controller="Auth">Already have an account? <span class="text-blue">Login</span></a>
 </form>
