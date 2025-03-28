@@ -1,37 +1,39 @@
 ﻿@{
-	Layout = "_CenterLayout";
+	Layout = "_CleanLayout";
 	ViewData["Title"] = "Register";
 }
 
-<form action="" class="user-form">
-    <h1 class="primary-heading">Create Account</h1>
-    <div class="form-content">
-        <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Sign Up with Google</button>
-        <div class="divider">OR</div>
-        <div class="input-container">
-            <label class="fw-semi-bold" for="">Full Name</label>
-            <input class="input-field" type="text" name="" id="" placeholder="Your full name">
+<div class="center">
+    <form action="" class="user-form">
+        <h1 class="primary-heading">Create Account</h1>
+        <div class="form-content">
+            <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Sign Up with Google</button>
+            <div class="divider">OR</div>
+            <div class="input-container">
+                <label class="fw-semi-bold" for="">Full Name</label>
+                <input class="input-field" type="text" name="" id="" placeholder="Your full name">
+            </div>
+            <div class="input-container">
+                <label class="fw-semi-bold" for="">Email</label>
+                <input class="input-field" type="email" name="" id="" placeholder="Your email address">
+            </div>
+            <div class="input-container">
+                <label class="fw-semi-bold" for="">Password</label>
+                <input class="input-field" type="password" name="" id="" placeholder="Enter your password">
+                <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
+            </div>
+            <div class="input-container">
+                <label class="fw-semi-bold" for="">Confirm Password</label>
+                <input class="input-field" type="password" name="" id="" placeholder="Confirm your password">
+                <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" name="" id="">
+                <span class="checkbox"></span>
+                <label for="">I accept <a class="text-blue" href="#">Terms and Conditions</a></label>
+            </div>
+            <a class="btn btn-blue btn-form" asp-action="Login" asp-controller="Auth">Create Account</a>
         </div>
-        <div class="input-container">
-            <label class="fw-semi-bold" for="">Email</label>
-            <input class="input-field" type="email" name="" id="" placeholder="Your email address">
-        </div>
-        <div class="input-container">
-            <label class="fw-semi-bold" for="">Password</label>
-            <input class="input-field" type="password" name="" id="" placeholder="Enter your password">
-            <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
-        </div>
-        <div class="input-container">
-            <label class="fw-semi-bold" for="">Confirm Password</label>
-            <input class="input-field" type="password" name="" id="" placeholder="Confirm your password">
-            <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
-        </div>
-        <div class="checkbox-container">
-            <input type="checkbox" name="" id="">
-            <span class="checkbox"></span>
-            <label for="">I accept <a class="text-blue" href="#">Terms and Conditions</a></label>
-        </div>
-        <a class="btn btn-blue btn-form" asp-action="Login" asp-controller="Auth">Create Account</a>
-    </div>
-    <a class="fw-semi-bold" asp-action="Login" asp-controller="Auth">Already have an account? <span class="text-blue">Login</span></a>
-</form>
+        <a class="fw-semi-bold" asp-action="Login" asp-controller="Auth">Already have an account? <span class="text-blue">Login</span></a>
+    </form>
+</div>
