@@ -2,4 +2,14 @@
 	ViewData["Title"] = "Projects";
 }
 
-<h1 class="secondary-heading">@ViewData["Title"]</h1>
+<header class="flex-sb">
+    <h1 class="secondary-heading">@ViewData["Title"]</h1>
+    <button class="btn btn-blue btn-add"><i class="fa-solid fa-plus"></i><span>Add Project</span></button>
+</header>
+<nav>
+    <ul class="tab-links">
+        <li><a class="tab-link active" href="#">ALL [0]</a></li>
+        <li><a class="tab-link" href="#">STARTED [0]</a></li>
+        <li><a class="tab-link" href="#">COMPLETED [0]</a></li>
+    </ul>
+</nav>
