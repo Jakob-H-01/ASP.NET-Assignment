@@ -162,6 +162,10 @@ img {
     bottom: 1.4rem;
 }
 
+.px-large {
+    padding-inline: 4.5rem;
+}
+
 /* General styling */
 body {
     font-family: var(--ff-body);
@@ -237,6 +241,7 @@ input {
 
     > main {
         grid-area: main;
+        overflow-y: auto;
     }
 
     > aside {
@@ -251,6 +256,10 @@ input {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(var(--min-col-size), 100%), 1fr));
     gap: 3rem;
+
+    &.small-cols {
+        --min-col-size: 300px;
+    }
 }
 
 /* Components */
@@ -610,6 +619,41 @@ input {
     
     > :first-child {
         color: rgba(26, 25, 38, 0.25);
+    }
+}
+
+.card-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--white-100);
+    padding: 4.8rem 2.4rem 2.4rem;
+    border-radius: 1.6rem;
+    box-shadow: 0 6px 6px 1px rgba(182, 182, 182, 0.1);
+    gap: 2.1rem;
+    position: relative;
+    
+    .info-box {
+        background-color: var(--white-200);
+        padding: 0.5em 1em;
+        font-size: 1.2rem;
+    }
+
+    > .btn-more {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    > .btn {
+        width: 100%;
+    }
+
+    .inner-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
     }
 }
 
