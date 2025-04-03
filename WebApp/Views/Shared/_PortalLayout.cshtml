@@ -17,24 +17,39 @@
                 <input type="search" name="" id="" placeholder="Search anything...">
             </div>
             <div class="menu-options">
-                <button class="btn-icon"><i class="fa-solid fa-bell"></i></button>
-                <button class="btn-icon" id="settings"><i class="fa-solid fa-gear"></i></button>
+                <button class="btn-icon" data-type="toggle" data-target="#notifications"><i class="fa-solid fa-bell"></i></button>
+                <button class="btn-icon" data-type="toggle" data-target="#settings"><i class="fa-solid fa-gear"></i></button>
                 <div class="divider-vertical"></div>
                 <a href="#"><img src="~/images/avatar.svg" alt=""></a>
             </div>
-            <div class="settings-dropdown hidden">
-                <div class="top">
-                    <img src="~/images/avatar.svg" alt="">
-                    <p>Tommy Mattin-Lassei</p>
+            <div id="notifications" class="notifications-dropdown dropdown hidden">
+                <div class="flex-sb">
+                    <p class="quinary-heading">Notifications</p>
+                    <div class="count">1</div>
                 </div>
-                <button class="middle switch-button">
+                <div class="divider-full"></div>
+                <div class="notification dropdown-option">
+                    <img src="~/images/project-logo.svg" alt="">
+                    <div>
+                        <p class="text-clr-emphasize">Website Redesign added</p>
+                        <p class="text-small text-clr-subtle">1 min ago</p>
+                    </div>
+                    <button class="btn-icon btn-delete"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div id="settings" class="settings-dropdown dropdown hidden">
+                <div class="dropdown-option">
+                    <img src="~/images/avatar.svg" alt="">
+                    <p class="fw-semi-bold text-clr-emphasize">Tommy Mattin-Lassei</p>
+                </div>
+                <div class="dropdown-option switch-button">
                     <i class="fa-solid fa-gear"></i>
                     <label for="">Dark Mode</label>
                     <input type="checkbox" name="" id="">
                     <span class="switch"></span>
-                </button>
+                </div>
                 <div class="divider-full"></div>
-                <a class="bottom" href="#"><i class="fa-solid fa-right-to-bracket"></i>Logout</a>
+                <a class="dropdown-option" href="#"><i class="fa-solid fa-right-to-bracket"></i>Logout</a>
             </div>
         </header>
         <main class="portal-main">
