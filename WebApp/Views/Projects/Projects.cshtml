@@ -4,7 +4,7 @@
 
 <header class="flex-sb">
     <h1 class="secondary-heading">@ViewData["Title"]</h1>
-    <button class="btn btn-blue btn-add"><i class="fa-solid fa-plus"></i><span>Add Project</span></button>
+    <button class="btn btn-blue btn-add" data-type="modal" data-target="#create-project"><i class="fa-solid fa-plus"></i><span>Add Project</span></button>
 </header>
 <nav>
     <ul class="tab-links">
@@ -191,3 +191,12 @@
         </div>
     </div>
 </section>
+<div id="create-project" class="overlay hidden">
+    <div class="modal">
+        <div class="flex-sb">
+            <h2 class="tertiary-heading">Add Project</h2>
+            <button class="btn-icon" data-type="modal" data-target="#create-project"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <button class="btn btn-blue btn-form">Create</button>
+    </div>
+</div>

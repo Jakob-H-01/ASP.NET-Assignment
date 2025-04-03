@@ -4,7 +4,7 @@
 
 <header class="flex-sb">
 	<h1 class="secondary-heading">@ViewData["Title"]</h1>
-	<button class="btn btn-blue btn-add"><i class="fa-solid fa-plus"></i><span>Add Member</span></button>
+    <button class="btn btn-blue btn-add" data-type="modal" data-target="#create-member"><i class="fa-solid fa-plus"></i><span>Add Member</span></button>
 </header>
 <section class="card-grid small-cols px-large">
     <div class="card-2">
@@ -98,3 +98,12 @@
         </div>
     </div>
 </section>
+<div id="create-member" class="overlay hidden">
+    <div class="modal">
+        <div class="flex-sb">
+            <h2 class="tertiary-heading">New Member</h2>
+            <button class="btn-icon" data-type="modal" data-target="#create-member"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <button class="btn btn-blue btn-form">Add Member</button>
+    </div>
+</div>
