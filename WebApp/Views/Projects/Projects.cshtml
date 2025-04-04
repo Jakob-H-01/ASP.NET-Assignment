@@ -30,7 +30,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-1" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -52,7 +52,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-2" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -74,7 +74,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-3" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -96,7 +96,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-4" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -118,7 +118,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-5" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -140,7 +140,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-6" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -162,7 +162,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-7" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -184,7 +184,7 @@
             <img src="~/images/avatar-small-2.svg" alt="">
         </div>
         <div id="card-8" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option"><i class="fa-solid fa-pen"></i>Edit</button>
+            <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
             <div class="divider-full"></div>
             <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Project</a>
@@ -198,5 +198,14 @@
             <button class="btn-icon" data-type="modal" data-target="#create-project"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <button class="btn btn-blue btn-form">Create</button>
+    </div>
+</div>
+<div id="edit-project" class="overlay hidden">
+    <div class="modal">
+        <div class="flex-sb">
+            <h2 class="tertiary-heading">Edit Project</h2>
+            <button class="btn-icon" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <button class="btn btn-blue btn-form">Save</button>
     </div>
 </div>
