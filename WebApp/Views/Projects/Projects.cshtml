@@ -195,17 +195,119 @@
     <div class="modal">
         <div class="flex-sb">
             <h2 class="tertiary-heading">Add Project</h2>
-            <button class="btn-icon" data-type="modal" data-target="#create-project"><i class="fa-solid fa-xmark"></i></button>
+            <button class="btn-icon" data-type="modal" data-target="#create-project"><i class="fa-solid fa-xmark fa-2xl"></i></button>
         </div>
-        <button class="btn btn-blue btn-form">Create</button>
+        <form action="" class="form">
+            <div class="image-previewer">
+                <div class="circle">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <img class="image-preview" src="" alt="">
+                <input class="hidden" type="file" accept="image/*">
+            </div>
+            <div class="form-inner">
+                <label for="">Project Name</label>
+                <input type="text" placeholder="Project Name">
+            </div>
+            <div class="form-inner">
+                <label for="">Client Name</label>
+                <input type="text" placeholder="Client Name">
+            </div>
+            <div class="form-inner">
+                <label for="">Description</label>
+                <textarea name="" id="" placeholder="Type something"></textarea>
+            </div>
+            <div class="form-inners">
+                <div class="form-inner">
+                    <label for="">Start Date</label>
+                    <input type="date">
+                    <div class="form-icon-container right">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                </div>
+                <div class="form-inner">
+                    <label for="">End Date</label>
+                    <input type="date">
+                    <div class="form-icon-container right">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label for="">Members</label>
+                <select name="" id=""></select>
+                <div class="form-icon-container right">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div class="form-inner">
+                <div class="form-icon-container left">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+                <label for="">Budget</label>
+                <input type="text" placeholder="0">
+            </div>
+            <button class="btn btn-blue btn-form">Create</button>
+        </form>
     </div>
 </div>
 <div id="edit-project" class="overlay hidden">
     <div class="modal">
         <div class="flex-sb">
             <h2 class="tertiary-heading">Edit Project</h2>
-            <button class="btn-icon" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-xmark"></i></button>
+            <button class="btn-icon" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-xmark fa-2xl"></i></button>
         </div>
-        <button class="btn btn-blue btn-form">Save</button>
+        <form action="" class="form">
+            <div class="image-previewer">
+                <div class="circle">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <img class="image-preview" src="" alt="">
+                <input class="hidden" type="file" accept="image/*">
+            </div>
+            <div class="form-inner">
+                <label for="">Project Name</label>
+                <input type="text" placeholder="Project Name">
+            </div>
+            <div class="form-inner">
+                <label for="">Client Name</label>
+                <input type="text" placeholder="Client Name">
+            </div>
+            <div class="form-inner">
+                <label for="">Description</label>
+                <textarea name="" id="" placeholder="Type something"></textarea>
+            </div>
+            <div class="form-inners">
+                <div class="form-inner">
+                    <label for="">Start Date</label>
+                    <input type="date">
+                    <div class="form-icon-container right">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                </div>
+                <div class="form-inner">
+                    <label for="">End Date</label>
+                    <input type="date">
+                    <div class="form-icon-container right">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label for="">Members</label>
+                <select name="" id=""></select>
+                <div class="form-icon-container right">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div class="form-inner">
+                <div class="form-icon-container left">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+                <label for="">Budget</label>
+                <input type="text" placeholder="0">
+            </div>
+            <button class="btn btn-blue btn-form">Save</button>
+        </form>
     </div>
 </div>

@@ -11,6 +11,7 @@
 * {
     margin: 0;
     padding: 0;
+    border: none;
     font: inherit;
 }
 
@@ -70,6 +71,7 @@ img {
     
     --dark-100: #38383B;
     --dark-200: #333333;
+    --dark-200-20: rgba(51, 51, 51, 0.7);
     --dark-300: #28263B;
     --dark-400: #202123;
     --dark-500: #1C1D1F;
@@ -97,6 +99,7 @@ img {
     --clr-logo: var(--dark-300);
     --clr-border: var(--gray-200);
     --clr-border-dark: var(--gray-300);
+    --clr-border-darkest: var(--gray-600);
 
     /* Typography */
     --ff-primary: 'Nunito', sans-serif;
@@ -187,6 +190,24 @@ img {
     bottom: 1.4rem;
 }
 
+.form-icon-container {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 1.6rem;
+    
+    &.left {
+        left: 1.4rem;
+    }
+
+    &.right {
+        right: 1.4rem;
+    }
+}
+
 .px-large {
     padding-inline: 4.5rem;
 }
@@ -253,13 +274,33 @@ p, h1, h2, h3, h4, h5, h6, span {
     font-weight: var(--fw-semi-bold);
 }
 
-input {
+form label {
+    font-weight: var(--fw-semi-bold);
+    color: var(--clr-heading);
+}
+
+form input, form textarea, form select {
     background-color: transparent;
     color: var(--gray-800);
-    
-    &::placeholder {
-        color: var(--gray-800);
-    }
+    border-radius: 1.4rem;
+    border: 1px solid var(--clr-border);
+    padding: 1.4rem 1.6rem;
+}
+
+form input::placeholder {
+    color: var(--gray-800);
+}
+
+form textarea {
+    resize: none;
+}
+
+form select {
+    appearance: none;
+}
+
+form input::-webkit-calendar-picker-indicator {
+    display: none;
 }
 
 /* Structure & Layout */
@@ -357,10 +398,15 @@ input {
     align-items: center;
     gap: 1.2rem;
     
-    > input {
+    input {
         width: 100%;
-        border: none;
         outline: none;
+        background-color: transparent;
+        color: var(--gray-800);
+    }
+
+    input::placeholder {
+        color: var(--gray-800);
     }
 }
 
@@ -874,6 +920,63 @@ input {
         top: 50%;
         transform: translateY(-50%);
         left: 2.2rem;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    
+    .image-previewer {
+        align-self: center;
+    }
+}
+
+.form-inners {
+    display: flex;
+    gap: 2.4rem;
+    
+    > * {
+        width: 100%;
+    }
+}
+
+.form-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+    position: relative;
+    
+    &:has(.form-icon-container.left) input {
+        padding-left: 4.4rem;
+    }
+}
+
+.image-previewer {
+    border: 1px dashed var(--clr-border-darkest);
+    width: 150px;
+    height: 150px;
+    border-radius: 30px;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &.circle {
+        border-radius: 50%;
+    }
+
+    .circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background-color: var(--dark-200-20);
+        color: var(--gray-600);
     }
 }
 
