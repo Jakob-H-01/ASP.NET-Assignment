@@ -5,6 +5,8 @@ toggleButtons.forEach(button => {
     views.push(view)
 })
 const modalButtons = document.querySelectorAll('[data-type="modal"]')
+const darkModeSwitch = document.querySelector('#dark-mode-switch')
+const darkModeInput = document.querySelector('#dark-mode-input')
 
 function toggleDropdown(element, targetView) {
     views.forEach(view => {
@@ -27,6 +29,28 @@ function toggleModal(modal) {
     modal.classList.toggle('hidden')
 }
 
+function toggleDarkMode() {
+    darkModeInput.click()
+    document.documentElement.classList.toggle('dark-mode')
+    const isEnabled = localStorage.getItem('dark-mode')
+
+    if (isEnabled === 'false' || isEnabled === null) {
+        localStorage.setItem('dark-mode', 'true')
+    } else if (isEnabled === 'true') {
+        localStorage.setItem('dark-mode', 'false')
+    }
+}
+
+function ifShouldBeDarkMode() {
+    const isEnabled = localStorage.getItem('dark-mode')
+
+    if (isEnabled === 'true') {
+        darkModeInput?.click()
+        document.documentElement.classList.add('dark-mode')
+        localStorage.setItem('dark-mode', 'true')
+    }
+}
+
 toggleButtons.forEach(button => {
     const targetView = document.querySelector(button.dataset.target)
     button.addEventListener('click', () => toggleDropdown(button, targetView))
@@ -35,3 +59,6 @@ modalButtons.forEach(button => {
     const targetModal = document.querySelector(button.dataset.target)
     button.addEventListener('click', () => toggleModal(targetModal))
 })
+darkModeSwitch?.addEventListener('click', toggleDarkMode)
+
+ifShouldBeDarkMode()

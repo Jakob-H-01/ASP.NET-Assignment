@@ -53,7 +53,7 @@ img {
 /* Variables */
 :root {
     /* Colors */
-    color-scheme: light dark;
+    color-scheme: light;
     
     --white-100: #FFFFFF;
     --white-200: #F5F7FA;
@@ -93,13 +93,19 @@ img {
     --purple: #826AF9;
     --purple-dark: #634CD4;
     
+    --clr-background-100: var(--white-100);
     --clr-background: var(--white-200);
+    --clr-background-accent-100: var(--white-200);
+    --clr-background-accent: var(--white-400);
+    --clr-background-accent-200: rgba(26, 25, 38, 0.25);
     --clr-body: var(--dark-300);
     --clr-heading: var(--dark-600);
     --clr-logo: var(--dark-300);
     --clr-border: var(--gray-200);
     --clr-border-dark: var(--gray-300);
     --clr-border-darkest: var(--gray-600);
+    --clr-box-shadow-100: rgba(182, 182, 182, 0.2);
+    --clr-box-shadow: rgba(182, 182, 182, 0.1);
 
     /* Typography */
     --ff-primary: 'Nunito', sans-serif;
@@ -120,6 +126,24 @@ img {
     --fs-700: 2.4rem;
     --fs-800: 2.8rem;
     --fs-900: 3.2rem;
+}
+
+:root.dark-mode {
+    color-scheme: dark;
+
+    --clr-background-100: var(--dark-400);
+    --clr-background: #151517;
+    --clr-background-accent-100: var(--dark-100);
+    --clr-background-accent: var(--dark-100);
+    --clr-background-accent-200: rgba(232, 232, 232, 0.25);
+    --clr-body: var(--gray-400);
+    --clr-heading: var(--white-100);
+    --clr-logo: var(--white-100);
+    --clr-border: #2F2F30;
+    --clr-border-dark: #232324;
+    --clr-border-darkest: #363638;
+    --clr-box-shadow-100: rgba(182, 182, 182, 0);
+    --clr-box-shadow: rgba(182, 182, 182, 0);
 }
 
 /* Utility classes */
@@ -158,7 +182,7 @@ img {
 }
 
 .text-red {
-    color: var(--red);
+    color: var(--red) !important;
 }
 
 .text-clr-subtle {
@@ -343,8 +367,8 @@ form input::-webkit-calendar-picker-indicator {
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 100svh;
-    background-color: var(--white-100);
-    
+    background-color: var(--clr-background-100);
+
     .left-col {
         height: 100%;
         background-image: url("/images/bg.jpg");
@@ -522,8 +546,8 @@ form input::-webkit-calendar-picker-indicator {
 }
 
 .btn-gray {
-    background-color: var(--white-200);
-    color: var(--dark-600);
+    background-color: var(--clr-background-accent-100);
+    color: var(--clr-heading);
 }
 
 .btn-add {
@@ -569,15 +593,15 @@ form input::-webkit-calendar-picker-indicator {
 }
 
 .user-form {
-    background-color: var(--white-100);
+    background-color: var(--clr-background-100);
     border-radius: 1.6rem;
-    box-shadow: 0 6px 6px 1px rgba(182, 182, 182, 0.1);
+    box-shadow: 0 6px 6px 1px var(--clr-box-shadow);
     padding: 9.9rem 10rem 2.9rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 60rem;
-    
+
     > :first-child {
         margin-bottom: 2.7rem;
     }
@@ -609,7 +633,7 @@ form input::-webkit-calendar-picker-indicator {
     > input {
         cursor: pointer;
         opacity: 0;
-        z-index: 999;
+        z-index: 1;
     }
 
     > input:checked ~ .checkbox {
@@ -705,12 +729,12 @@ form input::-webkit-calendar-picker-indicator {
 .card {
     display: flex;
     flex-direction: column;
-    background-color: var(--white-100);
+    background-color: var(--clr-background-100);
     padding: 2.4rem;
     border-radius: 1.6rem;
-    box-shadow: 0 6px 6px 1px rgba(182, 182, 182, 0.1);
+    box-shadow: 0 6px 6px 1px var(--clr-box-shadow);
     position: relative;
-    
+
     > .card-header {
         margin-bottom: 1.6rem;
     }
@@ -742,7 +766,7 @@ form input::-webkit-calendar-picker-indicator {
 }
 
 .info-box {
-    background-color: var(--white-400);
+    background-color: var(--clr-background-accent);
     color: var(--clr-heading);
     font-size: var(--fs-300);
     display: flex;
@@ -750,9 +774,9 @@ form input::-webkit-calendar-picker-indicator {
     gap: 0.4em;
     padding: 0.5em;
     border-radius: 0.7em;
-    
+
     > :first-child {
-        color: rgba(26, 25, 38, 0.25);
+        color: var(--clr-background-accent-200);
     }
 }
 
@@ -760,15 +784,14 @@ form input::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--white-100);
+    background-color: var(--clr-background-100);
     padding: 4.8rem 2.4rem 2.4rem;
     border-radius: 1.6rem;
-    box-shadow: 0 6px 6px 1px rgba(182, 182, 182, 0.1);
+    box-shadow: 0 6px 6px 1px var(--clr-box-shadow);
     gap: 2.1rem;
     position: relative;
-    
+
     .info-box {
-        background-color: var(--white-200);
         padding: 0.5em 1em;
         font-size: 1.2rem;
     }
@@ -795,8 +818,8 @@ form input::-webkit-calendar-picker-indicator {
     z-index: 1;
     display: flex;
     flex-direction: column;
-    background-color: var(--white-100);
-    box-shadow: 0 6px 6px 1px rgba(182, 182, 182, 0.1);
+    background-color: var(--clr-background-100);
+    box-shadow: 0 6px 6px 1px var(--clr-box-shadow);
     border-radius: 1.4rem;
     position: absolute;
 }
@@ -810,7 +833,8 @@ form input::-webkit-calendar-picker-indicator {
     width: 100%;
     background-color: transparent;
     border: none;
-    
+    color: var(--clr-body);
+
     &:hover {
         background-color: var(--clr-background);
     }
@@ -870,7 +894,7 @@ form input::-webkit-calendar-picker-indicator {
     padding: 0.8rem;
     right: 2.4rem;
     top: 6.4rem;
-    box-shadow: 0 0 6px 3px rgba(182, 182, 182, 0.2);
+    box-shadow: 0 0 6px 3px var(--clr-box-shadow-100);
     width: 230px;
 }
 
@@ -878,7 +902,7 @@ form input::-webkit-calendar-picker-indicator {
     position: relative;
     
     input {
-        opacity: 0;
+        display: none;
     }
 
     .switch {
@@ -892,7 +916,8 @@ form input::-webkit-calendar-picker-indicator {
     border-radius: 1.2rem;
     background-color: var(--clr-border-dark);
     position: relative;
-    
+    cursor: pointer;
+
     &::before {
         content: "";
         width: 1.6rem;
@@ -993,7 +1018,7 @@ form input::-webkit-calendar-picker-indicator {
 }
 
 .modal {
-    background-color: var(--white-100);
+    background-color: var(--clr-background-100);
     padding: 3rem;
     border-radius: 1.6rem;
     width: 550px;
