@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
 
 namespace WebApp.Controllers;
 
@@ -9,6 +10,16 @@ public class AdminController : Controller
     public IActionResult Login()
     {
         return View();
+    }
+
+    [HttpPost]
+    [Route("login")]
+    public IActionResult Login(LoginViewModel model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        return Redirect("/admin/members");
     }
     
     [Route("members")]

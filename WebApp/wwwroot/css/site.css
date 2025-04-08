@@ -605,7 +605,7 @@ form input::-webkit-calendar-picker-indicator {
         margin-bottom: 2.7rem;
     }
 
-    > :last-child {
+    > p {
         margin-top: 5.9rem;
     }
 }
