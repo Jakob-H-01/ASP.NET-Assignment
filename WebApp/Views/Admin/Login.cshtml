@@ -14,20 +14,26 @@
             <div class="form-content">
                 <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Login with Google</button>
                 <div class="divider">OR</div>
-                <div class="input-container">
+                <div class="form-inner">
                     <label class="fw-semi-bold" for="">Email</label>
-                    <input class="input-field" type="email" name="" id="" placeholder="Your email address">
+                    <div class="field-container">
+                        <input class="input-field" type="email" name="" id="" placeholder="Your email address">
+                        <span></span>
+                    </div>
                 </div>
-                <div class="input-container">
+                <div class="form-inner">
                     <label class="fw-semi-bold" for="">Password</label>
-                    <input class="input-field" type="password" name="" id="" placeholder="Enter your password">
-                    <button class="btn-icon form-icon"><img src="~/images/hide.svg" alt=""></button>
+                    <div class="field-container">
+                        <input class="input-field" type="password" name="" id="" placeholder="Enter your password">
+                        <button class="btn-icon form-icon-container right"><img src="~/images/hide.svg" alt=""></button>
+                        <span></span>
+                    </div>
                 </div>
                 <div class="flex-sb">
                     <div class="checkbox-container">
                         <input type="checkbox" name="" id="">
                         <span class="checkbox"></span>
-                        <label for="">Remember Me</label>
+                        <label class="fw-regular" for="">Remember Me</label>
                     </div>
                     <a class="text-blue" href="#">Forgot Password?</a>
                 </div>

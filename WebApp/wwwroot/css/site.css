@@ -83,6 +83,7 @@ img {
     --orange-dark: #F09330;
     --red: #FF6640;
     --red-dark: #E94D3F;
+    --red-dark-10: rgba(233, 77, 63, 0.1);
     --green: #31D482;
     --green-dark: #24B26B;
     --blue-100: #2CD9D9;
@@ -165,6 +166,10 @@ img {
     height: 100svh;
 }
 
+.fw-regular {
+    font-weight: var(--fw-regular);
+}
+
 .fw-semi-bold {
     font-weight: var(--fw-semi-bold);
 }
@@ -206,12 +211,6 @@ img {
 .btn-icon {
     border: none;
     background-color: transparent;
-}
-
-.form-icon {
-    position: absolute;
-    right: 1.4rem;
-    bottom: 1.4rem;
 }
 
 .form-icon-container {
@@ -618,12 +617,6 @@ form input::-webkit-calendar-picker-indicator {
     width: 100%;
 }
 
-.input-container {
-    display: grid;
-    gap: 0.9rem;
-    position: relative;
-}
-
 .checkbox-container {
     display: flex;
     align-items: center;
@@ -648,13 +641,6 @@ form input::-webkit-calendar-picker-indicator {
     > input:checked ~ .checkbox::before {
         display: block;
     }
-}
-
-.input-field {
-    padding: 1.4rem 1.6rem;
-    border-radius: 1.4rem;
-    border: 1px solid var(--clr-border);
-    color: var(--gray-800);
 }
 
 .checkbox {
@@ -977,6 +963,33 @@ form input::-webkit-calendar-picker-indicator {
     &:has(.form-icon-container.left) input {
         padding-left: 4.4rem;
     }
+}
+
+.field-container {
+    position: relative;
+    
+    input {
+        width: 100%;
+    }
+
+    &:has(.field-validation-error) .form-icon-container {
+        display: none;
+    }
+}
+
+.field-validation-error {
+    position: absolute;
+    z-index: 1;
+    right: 0.4rem;
+    top: 0.4rem;
+    background-color: var(--red-dark-10);
+    color: var(--red-dark);
+    border-radius: 1rem;
+    padding: 1.1rem 1.6rem;
+}
+
+.input-validation-error {
+    border-color: var(--red-dark);
 }
 
 .image-previewer {
