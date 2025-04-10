@@ -5,7 +5,8 @@ namespace WebApp.Models;
 public class RegisterViewModel
 {
     [Display(Name = "Full Name", Prompt = "Your full name")]
-    public string? FullName { get; set; }
+    [Required(ErrorMessage = "Required")]
+    public string FullName { get; set; } = null!;
 
     [Display(Name = "Email", Prompt = "Your email address")]
     [DataType(DataType.EmailAddress)]

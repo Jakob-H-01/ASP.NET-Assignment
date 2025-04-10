@@ -22,7 +22,7 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
         return result.MapTo<ServiceResult<IEnumerable<Member>>>();
     }
 
-    public async Task<ServiceResult<bool>> CreateMemberAsync(MemberCreationForm form, string roleName = "Standard")
+    public async Task<ServiceResult<bool>> CreateMemberAsync(RegisterForm form, string roleName = "Standard")
     {
         if (form == null)
             return new ServiceResult<bool> { Succeeded = false, StatusCode = 400, Error = "Form can't be null" };
@@ -33,7 +33,8 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
 
         try
         {
-            var memberEntity = form.MapTo<MemberEntity>();
+            //var memberEntity = form.MapTo<MemberEntity>();
+            var memberEntity = new MemberEntity { UserName = form.Email, Email = form.Email, FirstName = form.FirstName, LastName = form.LastName };
 
             var result = await _userManager.CreateAsync(memberEntity, form.Password ?? "BytMig123!");
             if (result.Succeeded)

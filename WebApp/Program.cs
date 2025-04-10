@@ -22,7 +22,7 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.AccessDeniedPath = "/denied";
     x.Cookie.HttpOnly = true;
     x.Cookie.IsEssential = true;
-    x.Cookie.Expiration = TimeSpan.FromHours(1);
+    //x.Cookie.Expiration = TimeSpan.FromHours(1);
     x.SlidingExpiration = true;
 });
 
@@ -41,6 +41,22 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roleNames = { "Standard", "Admin" };
+
+    foreach (var roleName in roleNames)
+    {
+        var exists = await roleManager.RoleExistsAsync(roleName);
+        if (!exists)
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+}
+
 app.MapStaticAssets();
 app.MapControllerRoute(
     name: "default",
