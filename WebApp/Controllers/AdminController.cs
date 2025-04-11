@@ -4,7 +4,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 [Route("admin")]
 public class AdminController : Controller
 {

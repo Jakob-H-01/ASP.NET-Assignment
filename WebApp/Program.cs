@@ -19,10 +19,10 @@ builder.Services.AddIdentity<MemberEntity, IdentityRole>(x =>
 builder.Services.ConfigureApplicationCookie(x =>
 {
     x.LoginPath = "/login";
-    x.AccessDeniedPath = "/denied";
+    x.AccessDeniedPath = "/admin/login";
     x.Cookie.HttpOnly = true;
     x.Cookie.IsEssential = true;
-    //x.Cookie.Expiration = TimeSpan.FromHours(1);
+    x.ExpireTimeSpan = TimeSpan.FromHours(1);
     x.SlidingExpiration = true;
 });
 
@@ -54,6 +54,20 @@ using (var scope = app.Services.CreateScope())
         {
             await roleManager.CreateAsync(new IdentityRole(roleName));
         }
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<MemberEntity>>();
+    var member = new MemberEntity { UserName = "admin@domain.com", Email = "admin@domain.com", FirstName = "Admin", LastName = "Member" };
+
+    var exists = await userManager.FindByEmailAsync(member.Email);
+    if (exists == null)
+    {
+        var result = await userManager.CreateAsync(member, "Admin123!");
+        if (result.Succeeded)
+            await userManager.AddToRoleAsync(member, "Admin");
     }
 }
 
