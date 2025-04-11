@@ -56,11 +56,11 @@
             @RenderBody()
         </main>
         <aside class="side-navigation">
-            <a class="logo" asp-action="Login" asp-controller="Auth"><img src="~/images/logo.svg" alt=""><span>alpha</span></a>
+            <a class="logo" asp-action="Projects" asp-controller="Projects"><img src="~/images/logo.svg" alt=""><span>alpha</span></a>
             <nav>
                 <ul class="nav-links">
                     <li><a class="nav-link @(Context.Request.Path == "/projects" ? "active" : "")" asp-action="Projects" asp-controller="Projects"><i class="fa-solid fa-briefcase"></i><span>Projects</span></a></li>
-                    <li><a class="nav-link @(Context.Request.Path == "/admin/members" ? "active" : "")" asp-action="Login" asp-controller="Admin"><i class="fa-solid fa-user-group"></i><span>Team Members</span></a></li>
+                    <li><a class="nav-link @(Context.Request.Path == "/admin/members" ? "active" : "")" asp-action="TeamMembers" asp-controller="Admin"><i class="fa-solid fa-user-group"></i><span>Team Members</span></a></li>
                 </ul>
             </nav>
         </aside>
