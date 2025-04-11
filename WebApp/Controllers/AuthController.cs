@@ -1,14 +1,20 @@
-﻿using Business.Interfaces;
+﻿using System.Security.Claims;
+using Business.Interfaces;
+using Data.Entities;
 using Domain.Dtos;
 using Domain.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-public class AuthController(IAuthService authService) : Controller
+public class AuthController(IAuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager, RoleManager<IdentityRole> roleManager) : Controller
 {
     private readonly IAuthService _authService = authService;
+    private readonly SignInManager<MemberEntity> _signInManager = signInManager;
+    private readonly UserManager<MemberEntity> _userManager = userManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
     public IActionResult Index()
     {
@@ -75,5 +81,63 @@ public class AuthController(IAuthService authService) : Controller
     {
         await _authService.LogoutAsync();
         return LocalRedirect("~/");
+    }
+
+    [HttpPost]
+    public IActionResult ExternalLogin(string provider, string returnUrl = null!)
+    {
+        if (string.IsNullOrEmpty(provider))
+        {
+            ModelState.AddModelError("", "Invalid provider");
+            return View("Login");
+        }
+
+        var redirectUrl = Url.Action("ExternalLoginCallback", "Auth", new { returnUrl })!;
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        return Challenge(properties, provider);
+    }
+
+    public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null!, string remoteError = null!)
+    {
+        returnUrl ??= Url.Content("~/projects");
+
+        if (!string.IsNullOrEmpty(remoteError))
+        {
+            ModelState.AddModelError("", $"Error from external provider: {remoteError}");
+            return View("Login");
+        }
+
+        var info = await _signInManager.GetExternalLoginInfoAsync();
+        if (info == null)
+            return RedirectToAction("Login");
+
+        var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+        if (signInResult.Succeeded)
+        {
+            return LocalRedirect(returnUrl);
+        }
+        else
+        {
+            string firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName)!;
+            string lastName = info.Principal.FindFirstValue(ClaimTypes.Surname)!;
+            string email = info.Principal.FindFirstValue(ClaimTypes.Email)!;
+            string username = $"ext_{info.LoginProvider.ToLower()}_{email}";
+
+            var member = new MemberEntity { UserName = username, Email = email, FirstName = firstName, LastName = lastName };
+            var memberResult = await _userManager.CreateAsync(member);
+            if (memberResult.Succeeded)
+            {
+                await _userManager.AddLoginAsync(member, info);
+                await _signInManager.SignInAsync(member, isPersistent: false);
+                return LocalRedirect(returnUrl);
+            }
+
+            foreach (var error in memberResult.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View("Login");
+        }
     }
 }

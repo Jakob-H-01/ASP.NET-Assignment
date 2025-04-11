@@ -4,6 +4,7 @@ using Data.Contexts;
 using Data.Entities;
 using Data.Interfaces;
 using Data.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,16 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.Cookie.IsEssential = true;
     x.ExpireTimeSpan = TimeSpan.FromHours(1);
     x.SlidingExpiration = true;
+    x.Cookie.SameSite = SameSiteMode.None;
+    x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie().AddGoogle(x =>
+{
+    x.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
+    x.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
 });
 
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
