@@ -7,6 +7,7 @@ namespace Business.Interfaces;
 public interface IMemberService
 {
     Task<ServiceResult<bool>> CreateMemberAsync(RegisterForm form, string roleName = "Standard");
+    Task<ServiceResult<Member>> GetMemberAsync(string id);
     Task<ServiceResult<IEnumerable<Member>>> GetMembersAsync();
     Task<ServiceResult<bool>> SetMemberRoleAsync(string memberId, string roleName);
 }

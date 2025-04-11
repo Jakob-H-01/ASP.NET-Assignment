@@ -16,12 +16,6 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
     private readonly UserManager<MemberEntity> _userManager = userManager;
     private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
-    public async Task<ServiceResult<IEnumerable<Member>>> GetMembersAsync()
-    {
-        var result = await _memberRepository.GetAllAsync();
-        return result.MapTo<ServiceResult<IEnumerable<Member>>>();
-    }
-
     public async Task<ServiceResult<bool>> CreateMemberAsync(RegisterForm form, string roleName = "Standard")
     {
         if (form == null)
@@ -52,6 +46,18 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
             Debug.WriteLine(ex.Message);
             return new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = ex.Message };
         }
+    }
+
+    public async Task<ServiceResult<IEnumerable<Member>>> GetMembersAsync()
+    {
+        var result = await _memberRepository.GetAllAsync();
+        return result.MapTo<ServiceResult<IEnumerable<Member>>>();
+    }
+
+    public async Task<ServiceResult<Member>> GetMemberAsync(string id)
+    {
+        var result = await _memberRepository.GetAsync(x => x.Id == id);
+        return result.MapTo<ServiceResult<Member>>();
     }
 
     public async Task<ServiceResult<bool>> SetMemberRoleAsync(string memberId, string roleName)

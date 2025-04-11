@@ -11,7 +11,7 @@ public static class MappingExtension
         TDestination destination = Activator.CreateInstance<TDestination>()!;
 
         var sourceProperties = source.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        var destinationProperties = source.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        var destinationProperties = typeof(TDestination).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (var destinationProperty in destinationProperties)
         {
