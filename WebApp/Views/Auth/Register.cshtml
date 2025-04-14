@@ -6,11 +6,14 @@
 }
 
 <div class="center">
-    <form class="user-form" asp-action="Register" asp-controller="Auth" method="post" novalidate>
+    <div class="surface form-container">
         <h1 class="primary-heading">Create Account</h1>
-        <div class="form-content">
-            <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Sign Up with Google</button>
-            <div class="divider">OR</div>
+        <form asp-action="ExternalLogin" asp-controller="Auth" method="post" novalidate>
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+            <button class="btn btn-gray btn-form btn-google" type="submit" name="provider" value="Google"><img src="~/images/google-icon.svg" alt="">Sign Up with Google</button>
+        </form>
+        <div class="divider">OR</div>
+        <form class="form" asp-action="Register" asp-controller="Auth" method="post" novalidate>
             <div class="form-inner">
                 <label class="fw-semi-bold" asp-for="FullName"></label>
                 <div class="field-container">
@@ -47,9 +50,9 @@
                 <label class="fw-regular" asp-for="TermsAndConditions">I accept <a class="text-blue" href="#">Terms and Conditions</a></label>
             </div>
             <button class="btn btn-blue btn-form" type="submit">Create Account</button>
-        </div>
-        <p class="fw-semi-bold">Already have an account? <a class="text-blue" asp-action="Login" asp-controller="Auth">Login</a></p>
-    </form>
+            <p class="fw-semi-bold mt">Already have an account? <a class="text-blue" asp-action="Login" asp-controller="Auth">Login</a></p>
+        </form>
+    </div>
 </div>
 
 <partial name="_ValidationScripts">

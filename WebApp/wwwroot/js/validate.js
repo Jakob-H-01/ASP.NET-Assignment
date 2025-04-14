@@ -1,4 +1,4 @@
-﻿const form = document.querySelector('form')
+﻿const form = document.querySelector('.form')
 const fields = form.querySelectorAll('input[data-val="true"]')
 
 function validateField(field) {

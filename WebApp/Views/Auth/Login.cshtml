@@ -6,14 +6,14 @@
 }
 
 <div class="center">
-    <h1 class="primary-heading">Login</h1>
-    <form asp-action="ExternalLogin" asp-controller="Auth" method="post" novalidate>
-        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
-        <button class="btn btn-gray btn-form btn-google" type="submit" name="provider" value="Google"><img src="~/images/google-icon.svg" alt="">Login with Google</button>
-    </form>
-    <form class="user-form" asp-action="Login" asp-controller="Auth" method="post" novalidate>
-        <div class="form-content">
-            <div class="divider">OR</div>
+    <div class="surface form-container">
+        <h1 class="primary-heading">Login</h1>
+        <form asp-action="ExternalLogin" asp-controller="Auth" method="post" novalidate>
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+            <button class="btn btn-gray btn-form btn-google" type="submit" name="provider" value="Google"><img src="~/images/google-icon.svg" alt="">Login with Google</button>
+        </form>
+        <div class="divider">OR</div>
+        <form class="form" asp-action="Login" asp-controller="Auth" method="post" novalidate>
             <div class="form-inner">
                 <label class="fw-semi-bold" asp-for="Email"></label>
                 <div class="field-container">
@@ -38,41 +38,9 @@
                 <a class="text-blue" href="#">Forgot Password?</a>
             </div>
             <button class="btn btn-blue btn-form" type="submit">Log In</button>
-        </div>
-        <p class="fw-semi-bold">Don't have an account? <a class="text-blue" asp-action="Register" asp-controller="Auth">Sign Up</a></p>
-    </form>
-    @* <form class="user-form" asp-action="Login" asp-controller="Auth" method="post" novalidate> *@
-    @*     <h1 class="primary-heading">Login</h1> *@
-    @*     <div class="form-content"> *@
-    @*         <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Login with Google</button> *@
-    @*         <div class="divider">OR</div> *@
-    @*         <div class="form-inner"> *@
-    @*             <label class="fw-semi-bold" asp-for="Email"></label> *@
-    @*             <div class="field-container"> *@
-    @*                 <input type="email" asp-for="Email"> *@
-    @*                 <span asp-validation-for="Email"></span> *@
-    @*             </div> *@
-    @*         </div> *@
-    @*         <div class="form-inner"> *@
-    @*             <label class="fw-semi-bold" asp-for="Password"></label> *@
-    @*             <div class="field-container"> *@
-    @*                 <input type="password" asp-for="Password"> *@
-    @*                 <button class="btn-icon form-icon-container right" type="button"><img src="~/images/hide.svg" alt=""></button> *@
-    @*                 <span asp-validation-for="Password"></span> *@
-    @*             </div> *@
-    @*         </div> *@
-    @*         <div class="flex-sb"> *@
-    @*             <div class="checkbox-container"> *@
-    @*                 <input type="checkbox" asp-for="RememberMe"> *@
-    @*                 <span class="checkbox"></span> *@
-    @*                 <label class="fw-regular" asp-for="RememberMe"></label> *@
-    @*             </div> *@
-    @*             <a class="text-blue" href="#">Forgot Password?</a> *@
-    @*         </div> *@
-    @*         <button class="btn btn-blue btn-form" type="submit">Log In</button> *@
-    @*     </div> *@
-    @*     <p class="fw-semi-bold">Don't have an account? <a class="text-blue" asp-action="Register" asp-controller="Auth">Sign Up</a></p> *@
-    @* </form> *@
+            <p class="fw-semi-bold mt">Don't have an account? <a class="text-blue" asp-action="Register" asp-controller="Auth">Sign Up</a></p>
+        </form>
+    </div>
 </div>
 
 <partial name="_ValidationScripts">

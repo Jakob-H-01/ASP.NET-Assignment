@@ -235,8 +235,18 @@ img {
     padding-inline: 4.5rem;
 }
 
+.mt {
+    margin-top: 3rem;
+}
+
 .hidden {
     display: none !important;
+}
+
+.surface {
+    background-color: var(--clr-background-100);
+    border-radius: 1.6rem;
+    box-shadow: 0 6px 6px 1px var(--clr-box-shadow);
 }
 
 /* General styling */
@@ -384,14 +394,6 @@ form input::-webkit-calendar-picker-indicator {
     .right-col {
         display: grid;
         place-items: center;
-    }
-
-    .user-form {
-        box-shadow: none;
-    }
-
-    .user-form > :last-child {
-        margin-top: 0;
     }
 }
 
@@ -591,30 +593,13 @@ form input::-webkit-calendar-picker-indicator {
     }
 }
 
-.user-form {
-    background-color: var(--clr-background-100);
-    border-radius: 1.6rem;
-    box-shadow: 0 6px 6px 1px var(--clr-box-shadow);
+.form-container {
     padding: 9.9rem 10rem 2.9rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60rem;
-
-    > :first-child {
-        margin-bottom: 2.7rem;
-    }
-
-    > p {
-        margin-top: 5.9rem;
-    }
-}
-
-.form-content {
+    width: 600px;
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    width: 100%;
+    text-align: center;
 }
 
 .checkbox-container {
@@ -959,6 +944,7 @@ form input::-webkit-calendar-picker-indicator {
     gap: 0.9rem;
     width: 100%;
     position: relative;
+    text-align: left;
     
     &:has(.form-icon-container.left) input {
         padding-left: 4.4rem;

@@ -11,11 +11,14 @@
         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.</p>
     </div>
     <div class="right-col">
-        <form class="user-form" asp-action="Login" asp-controller="Admin" method="post" novalidate>
+        <div class="form-container">
             <h2 class="primary-heading">Login</h2>
-            <div class="form-content">
-                <button class="btn btn-gray btn-form btn-google"><img src="~/images/google-icon.svg" alt="">Login with Google</button>
-                <div class="divider">OR</div>
+            <form asp-action="ExternalLogin" asp-controller="Auth" method="post" novalidate>
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                <button class="btn btn-gray btn-form btn-google" type="submit" name="provider" value="Google"><img src="~/images/google-icon.svg" alt="">Login with Google</button>
+            </form>
+            <div class="divider">OR</div>
+            <form class="form" asp-action="Login" asp-controller="Admin" method="post" novalidate>
                 <div class="form-inner">
                     <label class="fw-semi-bold" asp-for="Email"></label>
                     <div class="field-container">
@@ -40,8 +43,8 @@
                     <a class="text-blue" href="#">Forgot Password?</a>
                 </div>
                 <button class="btn btn-blue btn-form" type="submit">Log In</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
