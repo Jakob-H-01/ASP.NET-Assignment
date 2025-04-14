@@ -13,6 +13,7 @@ public class LoginViewModel
     [Display(Name = "Password", Prompt = "Enter your password")]
     [DataType(DataType.Password)]
     [Required(ErrorMessage = "Required")]
+    [RegularExpression(".{8,}", ErrorMessage = "Minimum 8 characters")]
     public string Password { get; set; } = null!;
 
     [Display(Name = "Remember Me")]

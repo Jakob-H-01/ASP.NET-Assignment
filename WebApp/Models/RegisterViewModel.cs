@@ -6,6 +6,7 @@ public class RegisterViewModel
 {
     [Display(Name = "Full Name", Prompt = "Your full name")]
     [Required(ErrorMessage = "Required")]
+    [RegularExpression(".* .*", ErrorMessage = "Must be full name")]
     public string FullName { get; set; } = null!;
 
     [Display(Name = "Email", Prompt = "Your email address")]
@@ -17,6 +18,7 @@ public class RegisterViewModel
     [Display(Name = "Password", Prompt = "Enter your password")]
     [DataType(DataType.Password)]
     [Required(ErrorMessage = "Required")]
+    [RegularExpression(".{8,}", ErrorMessage = "Minimum 8 characters")]
     public string Password { get; set; } = null!;
 
     [Display(Name = "Confirm Password", Prompt = "Confirm your password")]
