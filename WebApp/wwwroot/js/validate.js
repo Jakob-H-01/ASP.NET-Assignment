@@ -1,5 +1,6 @@
 ﻿const form = document.querySelector('.form')
 const fields = form.querySelectorAll('input[data-val="true"]')
+const passwordBtns = document.querySelectorAll('[data-type="toggle-password-visibility"]')
 
 function validateField(field) {
     let errorSpan = document.querySelector(`span[data-valmsg-for='${field.name}']`)
@@ -29,7 +30,18 @@ function validateField(field) {
         errorSpan.textContent = ''
     }
 }
+function togglePasswordVisibility(button) {
+    const input = button.previousElementSibling
+
+    if (input.type === 'password')
+        input.type = 'text'
+    else
+        input.type = 'password'
+}
 
 fields.forEach(field => {
     field.addEventListener('input', () => validateField(field))
+})
+passwordBtns.forEach(button => {
+    button.addEventListener('click', () => togglePasswordVisibility(button))
 })
