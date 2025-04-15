@@ -1,0 +1,20 @@
+﻿@model Member
+
+<div class="card-2">
+    <button class="btn-icon btn-more" data-type="toggle" data-target="#member-@Model.Id"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
+    <img src="~/images/avatar-large-1.svg" alt="">
+    <div class="inner-container">
+        <h2 class="quaternary-heading">@Model.FirstName @Model.LastName</h2>
+        <p class="info-box">@(Model.JobTitle != null ? Model.JobTitle : "Job Title?")</p>
+    </div>
+    <div class="inner-container">
+        <p>@Model.Email</p>
+        <p>@(Model.PhoneNumber != null ? Model.PhoneNumber : "Phone Number?")</p>
+    </div>
+    <button class="btn btn-gray">Message</button>
+    <div id="member-@Model.Id" class="card-dropdown dropdown hidden">
+        <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
+        <div class="divider-full"></div>
+        <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
+    </div>
+</div>

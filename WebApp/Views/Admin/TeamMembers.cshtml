@@ -1,102 +1,20 @@
-﻿@{
-	ViewData["Title"] = "Team Members";
+﻿@inject IMemberService memberService
+
+@{
+    ViewData["Title"] = "Team Members";
+    var result = await memberService.GetMembersAsync();
+    var members = result.Result;
 }
 
 <header class="flex-sb">
-	<h1 class="secondary-heading">@ViewData["Title"]</h1>
+    <h1 class="secondary-heading">@ViewData["Title"]</h1>
     <button class="btn btn-blue btn-add" data-type="modal" data-target="#create-member"><i class="fa-solid fa-plus"></i><span>Add Member</span></button>
 </header>
 <section class="card-grid small-cols px-large">
-    <div class="card-2">
-        <button class="btn-icon btn-more" data-type="toggle" data-target="#member-1"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
-        <img src="~/images/avatar-large-1.svg" alt="">
-        <div class="inner-container">
-            <h2 class="quaternary-heading">Joakim Lindh</h2>
-            <p class="info-box">Frontend Developer</p>
-        </div>
-        <div class="inner-container">
-            <p>joakim@domain.com</p>
-            <p>+46 070-123 50 01</p>
-        </div>
-        <button class="btn btn-gray">Message</button>
-        <div id="member-1" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
-            <div class="divider-full"></div>
-            <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
-        </div>
-    </div>
-    <div class="card-2">
-        <button class="btn-icon btn-more" data-type="toggle" data-target="#member-2"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
-        <img src="~/images/avatar-large-1.svg" alt="">
-        <div class="inner-container">
-            <h2 class="quaternary-heading">Joakim Lindh</h2>
-            <p class="info-box">Frontend Developer</p>
-        </div>
-        <div class="inner-container">
-            <p>joakim@domain.com</p>
-            <p>+46 070-123 50 01</p>
-        </div>
-        <button class="btn btn-gray">Message</button>
-        <div id="member-2" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
-            <div class="divider-full"></div>
-            <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
-        </div>
-    </div>
-    <div class="card-2">
-        <button class="btn-icon btn-more" data-type="toggle" data-target="#member-3"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
-        <img src="~/images/avatar-large-1.svg" alt="">
-        <div class="inner-container">
-            <h2 class="quaternary-heading">Joakim Lindh</h2>
-            <p class="info-box">Frontend Developer</p>
-        </div>
-        <div class="inner-container">
-            <p>joakim@domain.com</p>
-            <p>+46 070-123 50 01</p>
-        </div>
-        <button class="btn btn-gray">Message</button>
-        <div id="member-3" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
-            <div class="divider-full"></div>
-            <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
-        </div>
-    </div>
-    <div class="card-2">
-        <button class="btn-icon btn-more" data-type="toggle" data-target="#member-4"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
-        <img src="~/images/avatar-large-1.svg" alt="">
-        <div class="inner-container">
-            <h2 class="quaternary-heading">Joakim Lindh</h2>
-            <p class="info-box">Frontend Developer</p>
-        </div>
-        <div class="inner-container">
-            <p>joakim@domain.com</p>
-            <p>+46 070-123 50 01</p>
-        </div>
-        <button class="btn btn-gray">Message</button>
-        <div id="member-4" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
-            <div class="divider-full"></div>
-            <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
-        </div>
-    </div>
-    <div class="card-2">
-        <button class="btn-icon btn-more" data-type="toggle" data-target="#member-5"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
-        <img src="~/images/avatar-large-1.svg" alt="">
-        <div class="inner-container">
-            <h2 class="quaternary-heading">Joakim Lindh</h2>
-            <p class="info-box">Frontend Developer</p>
-        </div>
-        <div class="inner-container">
-            <p>joakim@domain.com</p>
-            <p>+46 070-123 50 01</p>
-        </div>
-        <button class="btn btn-gray">Message</button>
-        <div id="member-5" class="card-dropdown dropdown hidden">
-            <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
-            <div class="divider-full"></div>
-            <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
-        </div>
-    </div>
+    @foreach(var member in members!)
+    {
+        @await Html.PartialAsync("Partials/Components/_MemberCard", member)
+    }
 </section>
 <div id="create-member" class="overlay hidden">
     <div class="modal">
