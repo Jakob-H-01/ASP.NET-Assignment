@@ -62,8 +62,8 @@
                     <span asp-validation-for="Address"></span>
                 </div>
             </div>
-            <div class="form-inner">
-                <label>Date of Birth</label>
+            <fieldset class="form-inner">
+                <legend>Date of Birth</legend>
                 <div class="form-inners">
                     <label class="visually-hidden" asp-for="Day"></label>
                     <div class="field-container">
@@ -81,7 +81,7 @@
                         <span asp-validation-for="Year"></span>
                     </div>
                 </div>
-            </div>
+            </fieldset>
             <button class="btn btn-blue btn-form" type="submit">Add Member</button>
         </form>
     </div>

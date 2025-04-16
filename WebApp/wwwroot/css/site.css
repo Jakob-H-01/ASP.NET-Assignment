@@ -307,7 +307,7 @@ p, h1, h2, h3, h4, h5, h6, span {
     font-weight: var(--fw-semi-bold);
 }
 
-form label {
+form label, form legend {
     font-weight: var(--fw-semi-bold);
     color: var(--clr-heading);
 }
@@ -949,6 +949,10 @@ form input::-webkit-calendar-picker-indicator {
     &:has(.form-icon-container.left) input {
         padding-left: 4.4rem;
     }
+}
+
+fieldset.form-inner legend {
+    padding-bottom: 0.9rem;
 }
 
 .field-container {
