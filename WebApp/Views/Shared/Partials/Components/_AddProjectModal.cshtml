@@ -1,0 +1,87 @@
+﻿@model AddProjectViewModel
+
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "AddProject";
+}
+
+<div id="create-project" class="overlay hidden">
+    <div class="modal">
+        <div class="flex-sb">
+            <h2 class="tertiary-heading">Add Project</h2>
+            <button class="btn-icon" data-type="modal" data-target="#create-project"><i class="fa-solid fa-xmark fa-2xl"></i></button>
+        </div>
+        <form class="form" asp-action="AddProject" asp-controller="Projects" method="post" novalidate>
+            <div class="image-previewer">
+                <div class="circle">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <img class="image-preview" src="" alt="">
+                <input asp-for="Image" class="hidden" type="file" accept="image/*">
+            </div>
+            <div class="form-inner">
+                <label asp-for="ProjectName"></label>
+                <div class="field-container">
+                    <input type="text" asp-for="ProjectName">
+                    <span asp-validation-for="ProjectName"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="ClientName"></label>
+                <div class="field-container">
+                    <input type="text" asp-for="ClientName">
+                    <span asp-validation-for="ClientName"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="Description"></label>
+                <div class="field-container">
+                    <textarea asp-for="Description"></textarea>
+                    <span asp-validation-for="Description"></span>
+                </div>
+            </div>
+            <div class="form-inners">
+                <div class="form-inner">
+                    <label asp-for="StartDate"></label>
+                    <div class="field-container">
+                        <input type="date" asp-for="StartDate">
+                        <span asp-validation-for="StartDate"></span>
+                        <div class="form-icon-container right">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-inner">
+                    <label asp-for="EndDate"></label>
+                    <div class="field-container">
+                        <input type="date" asp-for="EndDate">
+                        <span asp-validation-for="EndDate"></span>
+                        <div class="form-icon-container right">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="Member"></label>
+                <div class="field-container">
+                    <select asp-for="Member"></select>
+                    <span asp-validation-for="Member"></span>
+                    <div class="form-icon-container right">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inner">
+                <div class="form-icon-container left">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+                <label asp-for="Budget"></label>
+                <div class="field-container">
+                    <input type="text" asp-for="Budget">
+                    <span asp-validation-for="Budget"></span>
+                </div>
+            </div>
+            <button class="btn btn-blue btn-form" type="submit">Create</button>
+        </form>
+    </div>
+</div>
