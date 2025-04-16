@@ -51,6 +51,15 @@ function ifShouldBeDarkMode() {
     }
 }
 
+function ifShouldShowModal() {
+    if (window.showAddModal) {
+        document.querySelector('#create-member').classList.remove('hidden')
+    }
+    if (window.showEditModal) {
+        document.querySelector('#edit-member').classList.remove('hidden')
+    }
+}
+
 toggleButtons.forEach(button => {
     const targetView = document.querySelector(button.dataset.target)
     button.addEventListener('click', () => toggleDropdown(button, targetView))
@@ -62,3 +71,4 @@ modalButtons.forEach(button => {
 darkModeSwitch?.addEventListener('click', toggleDarkMode)
 
 ifShouldBeDarkMode()
+ifShouldShowModal()

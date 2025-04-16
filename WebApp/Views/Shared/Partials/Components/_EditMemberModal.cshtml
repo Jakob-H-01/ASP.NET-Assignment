@@ -1,0 +1,89 @@
+﻿@model EditMemberViewModel
+
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "EditMember";
+}
+
+<div id="edit-member" class="overlay hidden">
+    <div class="modal">
+        <div class="flex-sb">
+            <h2 class="tertiary-heading">Edit Member</h2>
+            <button class="btn-icon" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-xmark fa-2xl"></i></button>
+        </div>
+        <form class="form" asp-action="EditMember" asp-controller="Admin" method="post" novalidate>
+            <input type="hidden" asp-for="Id" value="" />
+            <div class="image-previewer circle">
+                <div class="circle">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <img class="image-preview" src="" alt="">
+                <input asp-for="Image" class="hidden" type="file" accept="image/*">
+            </div>
+            <div class="form-inners">
+                <div class="form-inner">
+                    <label asp-for="FirstName"></label>
+                    <div class="field-container">
+                        <input type="text" asp-for="FirstName">
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+                </div>
+                <div class="form-inner">
+                    <label asp-for="LastName"></label>
+                    <div class="field-container">
+                        <input type="text" asp-for="LastName">
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="Email"></label>
+                <div class="field-container">
+                    <input type="email" asp-for="Email">
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="PhoneNumber"></label>
+                <div class="field-container">
+                    <input type="text" asp-for="PhoneNumber">
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="JobTitle"></label>
+                <div class="field-container">
+                    <input type="text" asp-for="JobTitle">
+                    <span asp-validation-for="JobTitle"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="Address"></label>
+                <div class="field-container">
+                    <input type="text" asp-for="Address">
+                    <span asp-validation-for="Address"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label>Date of Birth</label>
+                <div class="form-inners">
+                    <label class="visually-hidden" asp-for="Day"></label>
+                    <div class="field-container">
+                        <input type="number" asp-for="Day" min="1" max="31">
+                        <span asp-validation-for="Day"></span>
+                    </div>
+                    <label class="visually-hidden" asp-for="Month"></label>
+                    <div class="field-container">
+                        <input type="number" asp-for="Month" min="1" max="12">
+                        <span asp-validation-for="Month"></span>
+                    </div>
+                    <label class="visually-hidden" asp-for="Year"></label>
+                    <div class="field-container">
+                        <input type="number" asp-for="Year" min="1900" max="2025">
+                        <span asp-validation-for="Year"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-blue btn-form" type="submit">Save</button>
+        </form>
+    </div>
+</div>

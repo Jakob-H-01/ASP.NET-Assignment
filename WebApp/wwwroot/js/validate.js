@@ -1,9 +1,8 @@
-﻿const form = document.querySelector('.form')
-const fields = form.querySelectorAll('input[data-val="true"]')
+﻿const forms = document.querySelectorAll('.form')
 const passwordBtns = document.querySelectorAll('[data-type="toggle-password-visibility"]')
 
 function validateField(field) {
-    let errorSpan = document.querySelector(`span[data-valmsg-for='${field.name}']`)
+    let errorSpan = field.closest('form').querySelector(`span[data-valmsg-for='${field.name}']`)
     if (!errorSpan) return
 
     let errorMessage = ''
@@ -39,8 +38,12 @@ function togglePasswordVisibility(button) {
         input.type = 'password'
 }
 
-fields.forEach(field => {
-    field.addEventListener('input', () => validateField(field))
+forms.forEach(form => {
+    const fields = form.querySelectorAll('input[data-val="true"]')
+
+    fields.forEach(field => {
+        field.addEventListener('input', () => validateField(field))
+    })
 })
 passwordBtns.forEach(button => {
     button.addEventListener('click', () => togglePasswordVisibility(button))

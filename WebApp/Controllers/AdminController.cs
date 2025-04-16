@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -6,8 +7,10 @@ namespace WebApp.Controllers;
 
 [Authorize(Roles = "Admin")]
 [Route("admin")]
-public class AdminController : Controller
+public class AdminController(IMemberService memberService) : Controller
 {
+    private readonly IMemberService _memberService = memberService;
+
     [AllowAnonymous]
     [Route("login")]
     public IActionResult Login()
@@ -27,8 +30,58 @@ public class AdminController : Controller
     }
 
     [Route("members")]
-    public IActionResult TeamMembers()
+    public async Task<IActionResult> TeamMembers()
     {
-        return View();
+        var result = await _memberService.GetMembersAsync();
+        var members = result.Result;
+
+        var model = new TeamMembersViewModel
+        {
+            Members = members!
+        };
+
+        return View(model);
+    }
+    
+    [HttpPost]
+    [Route("members/add")]
+    public async Task<IActionResult> AddMember([Bind(Prefix = "AddMember")] AddMemberViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            var result = await _memberService.GetMembersAsync();
+            var members = result.Result;
+            var viewModel = new TeamMembersViewModel
+            {
+                Members = members!,
+                AddMember = model,
+                ShowAddModal = true
+            };
+
+            return View("TeamMembers", viewModel);
+        }
+
+        return RedirectToAction("TeamMembers");
+    }
+
+    [HttpPost]
+    [Route("members/edit")]
+    public async Task<IActionResult> EditMember([Bind(Prefix = "EditMember")] EditMemberViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            var result = await _memberService.GetMembersAsync();
+            var members = result.Result;
+            var viewModel = new TeamMembersViewModel
+            {
+                Members = members!,
+                EditMember = model,
+                ShowEditModal = true
+            };
+
+            return View("TeamMembers", viewModel);
+        }
+
+        return RedirectToAction("TeamMembers");
     }
 }

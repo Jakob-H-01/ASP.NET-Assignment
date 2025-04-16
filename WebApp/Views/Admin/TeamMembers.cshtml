@@ -1,9 +1,8 @@
-﻿@inject IMemberService memberService
+﻿@model TeamMembersViewModel
+@inject IMemberService memberService
 
 @{
     ViewData["Title"] = "Team Members";
-    var result = await memberService.GetMembersAsync();
-    var members = result.Result;
 }
 
 <header class="flex-sb">
@@ -11,112 +10,21 @@
     <button class="btn btn-blue btn-add" data-type="modal" data-target="#create-member"><i class="fa-solid fa-plus"></i><span>Add Member</span></button>
 </header>
 <section class="card-grid small-cols px-large">
-    @foreach(var member in members!)
+    @foreach(var member in Model.Members)
     {
         @await Html.PartialAsync("Partials/Components/_MemberCard", member)
     }
 </section>
-<div id="create-member" class="overlay hidden">
-    <div class="modal">
-        <div class="flex-sb">
-            <h2 class="tertiary-heading">New Member</h2>
-            <button class="btn-icon" data-type="modal" data-target="#create-member"><i class="fa-solid fa-xmark fa-2xl"></i></button>
-        </div>
-        <form action="" class="form">
-            <div class="image-previewer circle">
-                <div class="circle">
-                    <i class="fa-solid fa-camera"></i>
-                </div>
-                <img class="image-preview" src="" alt="">
-                <input class="hidden" type="file" accept="image/*">
-            </div>
-            <div class="form-inners">
-                <div class="form-inner">
-                    <label for="">First Name</label>
-                    <input type="text" placeholder="Your first name">
-                </div>
-                <div class="form-inner">
-                    <label for="">Last Name</label>
-                    <input type="text" placeholder="Your last name">
-                </div>
-            </div>
-            <div class="form-inner">
-                <label for="">Email</label>
-                <input type="email" placeholder="Your email address">
-            </div>
-            <div class="form-inner">
-                <label for="">Phone</label>
-                <input type="text" placeholder="Your phone number">
-            </div>
-            <div class="form-inner">
-                <label for="">Job Title</label>
-                <input type="text" placeholder="Your job title"></input>
-            </div>
-            <div class="form-inner">
-                <label for="">Address</label>
-                <input type="text" placeholder="Your address"></input>
-            </div>
-            <div class="form-inner">
-                <label for="">Date of Birth</label>
-                <div class="form-inners">
-                    <input type="number" placeholder="Day" min="1" max="31">
-                    <input type="number" placeholder="Month" min="1" max="12">
-                    <input type="number" placeholder="Year" min="1900" max="2025">
-                </div>
-            </div>
-            <button class="btn btn-blue btn-form">Add Member</button>
-        </form>
-    </div>
-</div>
-<div id="edit-member" class="overlay hidden">
-    <div class="modal">
-        <div class="flex-sb">
-            <h2 class="tertiary-heading">Edit Member</h2>
-            <button class="btn-icon" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-xmark fa-2xl"></i></button>
-        </div>
-        <form action="" class="form">
-            <div class="image-previewer circle">
-                <div class="circle">
-                    <i class="fa-solid fa-camera"></i>
-                </div>
-                <img class="image-preview" src="" alt="">
-                <input class="hidden" type="file" accept="image/*">
-            </div>
-            <div class="form-inners">
-                <div class="form-inner">
-                    <label for="">First Name</label>
-                    <input type="text" placeholder="Your first name">
-                </div>
-                <div class="form-inner">
-                    <label for="">Last Name</label>
-                    <input type="text" placeholder="Your last name">
-                </div>
-            </div>
-            <div class="form-inner">
-                <label for="">Email</label>
-                <input type="email" placeholder="Your email address">
-            </div>
-            <div class="form-inner">
-                <label for="">Phone</label>
-                <input type="text" placeholder="Your phone number">
-            </div>
-            <div class="form-inner">
-                <label for="">Job Title</label>
-                <input type="text" placeholder="Your job title"></input>
-            </div>
-            <div class="form-inner">
-                <label for="">Address</label>
-                <input type="text" placeholder="Your address"></input>
-            </div>
-            <div class="form-inner">
-                <label for="">Date of Birth</label>
-                <div class="form-inners">
-                    <input type="number" placeholder="Day" min="1" max="31">
-                    <input type="number" placeholder="Month" min="1" max="12">
-                    <input type="number" placeholder="Year" min="1900" max="2025">
-                </div>
-            </div>
-            <button class="btn btn-blue btn-form">Save</button>
-        </form>
-    </div>
-</div>
+@await Html.PartialAsync("Partials/Components/_AddMemberModal", Model.AddMember)
+@await Html.PartialAsync("Partials/Components/_EditMemberModal", Model.EditMember)
+
+<script>
+    window.showAddModal = @(Model.ShowAddModal.ToString().ToLower())
+    window.showEditModal = @(Model.ShowEditModal.ToString().ToLower())
+
+    if (window.location.pathname !== '/admin/members') {
+        window.history.replaceState({}, '', '/admin/members');
+    }
+</script>
+
+<partial name="_ValidationScripts">

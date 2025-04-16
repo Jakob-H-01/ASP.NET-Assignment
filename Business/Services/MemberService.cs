@@ -27,7 +27,6 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
 
         try
         {
-            //var memberEntity = form.MapTo<MemberEntity>();
             var memberEntity = new MemberEntity { UserName = form.Email, Email = form.Email, FirstName = form.FirstName, LastName = form.LastName };
 
             var result = await _userManager.CreateAsync(memberEntity, form.Password ?? "BytMig123!");
