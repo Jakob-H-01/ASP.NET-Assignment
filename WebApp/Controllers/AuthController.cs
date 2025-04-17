@@ -9,12 +9,12 @@ using WebApp.Models;
 
 namespace WebApp.Controllers;
 
-public class AuthController(IAuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager, RoleManager<IdentityRole> roleManager) : Controller
+public class AuthController(IAuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager, IMemberService memberService) : Controller
 {
     private readonly IAuthService _authService = authService;
+    private readonly IMemberService _memberService = memberService;
     private readonly SignInManager<MemberEntity> _signInManager = signInManager;
     private readonly UserManager<MemberEntity> _userManager = userManager;
-    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
     public IActionResult Index()
     {
@@ -64,8 +64,7 @@ public class AuthController(IAuthService authService, SignInManager<MemberEntity
         if (!ModelState.IsValid)
             return View(model);
 
-        //var loginForm = model.MapTo<LoginForm>();
-        var loginForm = new LoginForm { Email = model.Email, Password = model.Password, RememberMe = model.RememberMe };
+        var loginForm = model.MapTo<LoginForm>();
         var result = await _authService.LoginAsync(loginForm);
         if (result.Succeeded)
             return LocalRedirect(returnUrl);
@@ -122,7 +121,9 @@ public class AuthController(IAuthService authService, SignInManager<MemberEntity
 
             var member = new MemberEntity { UserName = username, Email = email, FirstName = firstName, LastName = lastName };
             var memberResult = await _userManager.CreateAsync(member);
-            if (memberResult.Succeeded)
+            var roleResult = await _memberService.SetMemberRoleAsync(member.Id, "Standard");
+
+            if (memberResult.Succeeded && roleResult.Succeeded)
             {
                 await _userManager.AddLoginAsync(member, info);
                 await _signInManager.SignInAsync(member, isPersistent: false);
