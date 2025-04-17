@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Domain.Dtos;
+﻿namespace Domain.Dtos;
 
 public class MemberCreationForm
 {
@@ -11,8 +9,6 @@ public class MemberCreationForm
     public string? Address { get; set; }
     public string Email { get; set; } = null!;
     public string? PhoneNumber { get; set; }
-
-    [Column(TypeName = "date")]
     public DateTime? DateOfBirth { get; set; }
     public string? Password { get; set; }
 }

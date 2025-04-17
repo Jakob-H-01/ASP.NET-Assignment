@@ -64,6 +64,13 @@ public class AdminController(IMemberService memberService) : Controller
         }
 
         var memberForm = model.MapTo<MemberCreationForm>();
+
+        if (model.Day != null && model.Month != null && model.Year != null)
+        {
+            var dateOfBirth = new DateTime((int)model.Year, (int)model.Month, (int)model.Day);
+            memberForm.DateOfBirth = dateOfBirth;
+        }
+
         await _memberService.CreateMemberAsync(memberForm);
 
         return RedirectToAction("TeamMembers");

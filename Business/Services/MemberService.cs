@@ -27,7 +27,6 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
 
         try
         {
-            //var memberEntity = new MemberEntity { UserName = form.Email, Email = form.Email, FirstName = form.FirstName, LastName = form.LastName };
             var memberEntity = form.MapTo<MemberEntity>();
             memberEntity.UserName = form.Email;
 

@@ -22,6 +22,7 @@ public class AddMemberViewModel
 
     [Display(Name = "Phone", Prompt = "Your phone number")]
     [DataType(DataType.PhoneNumber)]
+    [RegularExpression("^[+]?[0-9]+$", ErrorMessage = "Invalid phone number")]
     public string? PhoneNumber { get; set; }
 
     [Display(Name = "Job Title", Prompt = "Your job title")]
@@ -31,11 +32,11 @@ public class AddMemberViewModel
     public string? Address { get; set; }
 
     [Display(Name = "Day", Prompt = "Day")]
-    public string? Day { get; set; }
+    public int? Day { get; set; }
 
     [Display(Name = "Month", Prompt = "Month")]
-    public string? Month { get; set; }
+    public int? Month { get; set; }
 
     [Display(Name = "Year", Prompt = "Year")]
-    public string? Year { get; set; }
+    public int? Year { get; set; }
 }
