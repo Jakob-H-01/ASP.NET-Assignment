@@ -28,8 +28,8 @@ public class AuthService(IMemberService memberService, SignInManager<MemberEntit
         if (form == null)
             return new ServiceResult<bool> { Succeeded = false, StatusCode = 400, Error = "Form can't be null" };
 
-        //var memberForm = form.MapTo<MemberCreationForm>();
-        var result = await _memberService.CreateMemberAsync(form);
+        var memberForm = form.MapTo<MemberCreationForm>();
+        var result = await _memberService.CreateMemberAsync(memberForm);
         return result.Succeeded
             ? new ServiceResult<bool> { Succeeded = true, StatusCode = 201 }
             : new ServiceResult<bool> { Succeeded = false, StatusCode = result.StatusCode, Error = result.Error };

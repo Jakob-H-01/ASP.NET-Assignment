@@ -37,10 +37,7 @@ public class AuthController(IAuthService authService, SignInManager<MemberEntity
             return View(model);
 
         string[] names = model.FullName.Split(" ");
-        //var registerForm = model.MapTo<RegisterForm>();
         var registerForm = new RegisterForm { Email = model.Email, FirstName = names[0], LastName = names[1], Password = model.Password };
-        //registerForm.FirstName = names[0];
-        //registerForm.LastName = names[1];
 
         var result = await _authService.RegisterAsync(registerForm);
         if (result.Succeeded)

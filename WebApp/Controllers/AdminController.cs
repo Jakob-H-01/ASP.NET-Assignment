@@ -1,4 +1,6 @@
 ﻿using Business.Interfaces;
+using Domain.Dtos;
+using Domain.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
@@ -60,6 +62,9 @@ public class AdminController(IMemberService memberService) : Controller
 
             return View("TeamMembers", viewModel);
         }
+
+        var memberForm = model.MapTo<MemberCreationForm>();
+        await _memberService.CreateMemberAsync(memberForm);
 
         return RedirectToAction("TeamMembers");
     }

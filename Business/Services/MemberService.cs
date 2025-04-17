@@ -16,7 +16,7 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
     private readonly UserManager<MemberEntity> _userManager = userManager;
     private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
-    public async Task<ServiceResult<bool>> CreateMemberAsync(RegisterForm form, string roleName = "Standard")
+    public async Task<ServiceResult<bool>> CreateMemberAsync(MemberCreationForm form, string roleName = "Standard")
     {
         if (form == null)
             return new ServiceResult<bool> { Succeeded = false, StatusCode = 400, Error = "Form can't be null" };
@@ -27,9 +27,11 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
 
         try
         {
-            var memberEntity = new MemberEntity { UserName = form.Email, Email = form.Email, FirstName = form.FirstName, LastName = form.LastName };
+            //var memberEntity = new MemberEntity { UserName = form.Email, Email = form.Email, FirstName = form.FirstName, LastName = form.LastName };
+            var memberEntity = form.MapTo<MemberEntity>();
+            memberEntity.UserName = form.Email;
 
-            var result = await _userManager.CreateAsync(memberEntity, form.Password ?? "BytMig123!");
+            var result = await _userManager.CreateAsync(memberEntity, form.Password ?? "Temp123!");
             if (result.Succeeded)
             {
                 var setRoleResult = await SetMemberRoleAsync(memberEntity.Id, roleName);
