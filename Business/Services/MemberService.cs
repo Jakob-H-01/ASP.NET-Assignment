@@ -93,4 +93,10 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
             ? new ServiceResult<bool> { Succeeded = true, StatusCode = 200 }
             : new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = "Unable to set member role" };
     }
+
+    public async Task<ServiceResult<bool>> DeleteMemberAsync(string id)
+    {
+        var result = await _memberRepository.DeleteAsync(x => x.Id == id);
+        return result.MapTo<ServiceResult<bool>>();
+    }
 }

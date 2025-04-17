@@ -84,4 +84,13 @@ public class AdminController(IMemberService memberService) : Controller
 
         return RedirectToAction("TeamMembers");
     }
+    
+    [HttpPost]
+    [Route("members/delete")]
+    public async Task<IActionResult> DeleteMember(string id)
+    {
+        await _memberService.DeleteMemberAsync(id);
+
+        return RedirectToAction("TeamMembers");
+    }
 }

@@ -15,6 +15,8 @@
     <div id="member-@Model.Id" class="card-dropdown dropdown hidden">
         <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
         <div class="divider-full"></div>
-        <a href="#" class="dropdown-option text-red"><i class="fa-solid fa-trash"></i>Delete Member</a>
+        <form asp-action="DeleteMember" asp-controller="Admin" method="post" novalidate>
+            <button class="dropdown-option text-red" type="submit" name="id" value="@Model.Id"><i class="fa-solid fa-trash"></i>Delete Member</button>
+        </form>
     </div>
 </div>

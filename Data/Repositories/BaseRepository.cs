@@ -92,13 +92,17 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         }
     }
 
-    public virtual async Task<RepositoryResult<bool>> DeleteAsync(TEntity entity)
+    public virtual async Task<RepositoryResult<bool>> DeleteAsync(Expression<Func<TEntity, bool>> findBy)
     {
-        if (entity == null)
-            return new RepositoryResult<bool> { Succeeded = false, StatusCode = 400, Error = "Entity can't be null" };
+        if (findBy == null)
+            return new RepositoryResult<bool> { Succeeded = false, StatusCode = 400, Error = "Search param can't be null" };
 
         try
         {
+            var entity = await _table.FirstOrDefaultAsync(findBy) ?? null!;
+            if (entity == null)
+                return new RepositoryResult<bool> { Succeeded = false, StatusCode = 404, Error = "Entity not found" };
+
             _table.Remove(entity);
             await _context.SaveChangesAsync();
             return new RepositoryResult<bool> { Succeeded = true, StatusCode = 200 };
