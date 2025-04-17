@@ -71,7 +71,7 @@ public class AdminController(IMemberService memberService) : Controller
             memberForm.DateOfBirth = dateOfBirth;
         }
 
-        await _memberService.CreateMemberAsync(memberForm);
+        await _memberService.CreateMemberAsync(memberForm, model.RoleName);
 
         return RedirectToAction("TeamMembers");
     }

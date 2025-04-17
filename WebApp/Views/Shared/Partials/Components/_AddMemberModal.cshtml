@@ -82,6 +82,16 @@
                     </div>
                 </div>
             </fieldset>
+            <div class="form-inner">
+                <label asp-for="RoleName"></label>
+                <div class="field-container">
+                    <select type="text" asp-for="RoleName">
+                        <option value="Standard">Standard</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <span asp-validation-for="RoleName"></span>
+                </div>
+            </div>
             <button class="btn btn-blue btn-form" type="submit">Add Member</button>
         </form>
     </div>

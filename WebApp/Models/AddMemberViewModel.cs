@@ -39,4 +39,8 @@ public class AddMemberViewModel
 
     [Display(Name = "Year", Prompt = "Year")]
     public int? Year { get; set; }
+
+    [Display(Name = "Role")]
+    [Required(ErrorMessage = "Required")]
+    public string RoleName { get; set; } = null!;
 }
