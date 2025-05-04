@@ -1,8 +1,8 @@
-﻿using Business.Interfaces;
+﻿using System.Linq.Expressions;
+using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
-using Data.Repositories;
 using Domain.Dtos;
 using Domain.Extensions;
 using Domain.Models;
@@ -30,13 +30,13 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
         return result.MapTo<ServiceResult<bool>>();
     }
 
-    public async Task<ServiceResult<IEnumerable<Project>>> GetProjectsAsync()
+    public async Task<ServiceResult<IEnumerable<Project>>> GetProjectsAsync(Expression<Func<ProjectEntity, bool>>? filterBy = null)
     {
         var result = await _projectRepository.GetAllAsync
             (
                 orderByDescending: false,
                 sortBy: null,
-                filterBy: null,
+                filterBy: filterBy,
                 include => include.Member,
                 include => include.Status,
                 include => include.Client

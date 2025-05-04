@@ -1,7 +1,18 @@
 ﻿@model ProjectsViewModel
+@inject IProjectService projectService
+@inject IStatusService statusService
 
 @{
-	ViewData["Title"] = "Projects";
+    ViewData["Title"] = "Projects";
+
+    var startedStatus = await statusService.GetStatusByNameAsync("Started");
+    var startedResponse = await projectService.GetProjectsAsync(x => x.StatusId == startedStatus.Result!.Id);    
+
+    var completedStatus = await statusService.GetStatusByNameAsync("Completed");
+    var completedResponse = await projectService.GetProjectsAsync(x => x.StatusId == completedStatus.Result!.Id);
+
+    var numberOfStartedProjects = startedResponse.Result!.Count();
+    var numberOfCompletedProjects = completedResponse.Result!.Count();
 }
 
 <header class="flex-sb">
@@ -10,9 +21,9 @@
 </header>
 <nav>
     <ul class="tab-links">
-        <li><a class="tab-link active" href="#">ALL [8]</a></li>
-        <li><a class="tab-link" href="#">STARTED [8]</a></li>
-        <li><a class="tab-link" href="#">COMPLETED [0]</a></li>
+        <li><a class="tab-link active" href="#">ALL [@Model.Projects.Count()]</a></li>
+        <li><a class="tab-link" href="#">STARTED [@numberOfStartedProjects]</a></li>
+        <li><a class="tab-link" href="#">COMPLETED [@numberOfCompletedProjects]</a></li>
     </ul>
 </nav>
 <section class="card-grid">
