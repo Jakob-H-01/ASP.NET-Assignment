@@ -26,6 +26,7 @@ public static class MappingExtension
         return destination;
     }
 
+    /* Genererad av ChatGPT start */
     public static void MapFrom<TDestination>(this TDestination destination, object source)
     {
         ArgumentNullException.ThrowIfNull(source, nameof(source));
@@ -46,4 +47,5 @@ public static class MappingExtension
             }
         }
     }
+    /* Genererad av ChatGPT slut */
 }

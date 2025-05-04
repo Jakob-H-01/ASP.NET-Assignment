@@ -1,18 +1,25 @@
 ﻿@model Project
+@inject IClientService clientService
+
+@{
+    var clientResponse = await clientService.GetClientByIdAsync(Model.ClientId);
+    var clientName = clientResponse.Result!.ClientName;
+}
 
 <div class="card">
     <div class="card-header">
         <img src="~/images/project-logo.svg" alt="">
         <div class="card-heading">
             <h2 class="senary-heading">@Model.ProjectName</h2>
-            <p>GitLab Inc.</p>
+            <p>@clientName</p>
         </div>
         <button class="btn-icon btn-more" data-type="toggle" data-target="#t-@Model.Id"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
     </div>
-    <p>It is necessary to develop a website redesign in a corporate style.</p>
+    <p>@(Model.Description != null ? Model.Description : "Description")</p>
     <div class="card-footer">
-        <p class="info-box"><i class="fa-solid fa-clock"></i><span>1 week left</span></p>
-        <img src="~/images/avatar-small-1.svg" alt="">
+        <p class="info-box" style="background-color: @(Model.EndDate == null ? "" : ((DateTime)Model.EndDate < DateTime.Now ? "var(--red-25)" : "var(--red-10)"));">
+            <i class="fa-solid fa-clock" style="color: @(Model.EndDate == null ? "" : ((DateTime)Model.EndDate < DateTime.Now ? "var(--red)" : "var(--red)"));"></i><span style="color: @(Model.EndDate == null ? "" : ((DateTime)Model.EndDate < DateTime.Now ? "var(--red-dark)" : "var(--red-dark)"));">@(Model.EndDate == null ? "No due date" : ((DateTime)Model.EndDate < DateTime.Now ? "Overdue" : $"{((DateTime)Model.EndDate - DateTime.Now).Days} days left"))</span>
+        </p>
         <img src="~/images/avatar-small-2.svg" alt="">
     </div>
     <div id="t-@Model.Id" class="card-dropdown dropdown hidden">

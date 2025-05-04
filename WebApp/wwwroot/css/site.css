@@ -82,6 +82,8 @@ img {
     --orange: #FF9640;
     --orange-dark: #F09330;
     --red: #FF6640;
+    --red-10: rgba(255, 102, 64, 0.1);
+    --red-25: rgba(255, 102, 64, 0.25);
     --red-dark: #E94D3F;
     --red-dark-10: rgba(233, 77, 63, 0.1);
     --green: #31D482;

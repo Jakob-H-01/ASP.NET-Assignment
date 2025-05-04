@@ -9,9 +9,10 @@ namespace WebApp.Controllers;
 
 [Authorize(Roles = "Admin")]
 [Route("admin")]
-public class AdminController(IMemberService memberService) : Controller
+public class AdminController(IMemberService memberService, IAuthService authService) : Controller
 {
     private readonly IMemberService _memberService = memberService;
+    private readonly IAuthService _authService = authService;
 
     [AllowAnonymous]
     [Route("login")]
@@ -23,12 +24,21 @@ public class AdminController(IMemberService memberService) : Controller
     [AllowAnonymous]
     [HttpPost]
     [Route("login")]
-    public IActionResult Login(LoginViewModel model)
+    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = "~/admin/members")
     {
+        ViewBag.ErrorMessage = null;
+        ViewBag.ReturnUrl = returnUrl;
+
         if (!ModelState.IsValid)
             return View(model);
 
-        return Redirect("/admin/members");
+        var loginForm = model.MapTo<LoginForm>();
+        var result = await _authService.LoginAsync(loginForm);
+        if (result.Succeeded)
+            return LocalRedirect(returnUrl);
+
+        ViewBag.ErrorMessage = result.Error;
+        return View(model);
     }
 
     [Route("members")]
@@ -44,7 +54,7 @@ public class AdminController(IMemberService memberService) : Controller
 
         return View(model);
     }
-    
+
     [HttpPost]
     [Route("members/add")]
     public async Task<IActionResult> AddMember([Bind(Prefix = "AddMember")] AddMemberViewModel model)
@@ -106,7 +116,7 @@ public class AdminController(IMemberService memberService) : Controller
 
         return RedirectToAction("TeamMembers");
     }
-    
+
     [HttpPost]
     [Route("members/delete")]
     public async Task<IActionResult> DeleteMember(string id)
