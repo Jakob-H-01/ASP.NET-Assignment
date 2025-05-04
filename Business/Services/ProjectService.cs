@@ -12,13 +12,29 @@ public class ProjectService(IProjectRepository projectRepository) : IProjectServ
 
     public async Task<ServiceResult<IEnumerable<Project>>> GetProjectsAsync()
     {
-        var result = await _projectRepository.GetAllAsync();
+        var result = await _projectRepository.GetAllAsync
+            (
+                orderByDescending: false,
+                sortBy: null,
+                filterBy: null,
+                include => include.Member,
+                include => include.Status,
+                include => include.Client
+            );
+
         return result.MapTo<ServiceResult<IEnumerable<Project>>>();
     }
 
     public async Task<ServiceResult<Project>> GetProjectAsync(string id)
     {
-        var result = await _projectRepository.GetAsync(x => x.Id == id);
+        var result = await _projectRepository.GetAsync
+            (
+                findBy: x => x.Id == id,
+                include => include.Member,
+                include => include.Status,
+                include => include.Client
+            );
+
         return result.MapTo<ServiceResult<Project>>();
     }
 }

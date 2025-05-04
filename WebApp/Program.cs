@@ -45,6 +45,8 @@ builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IStatusService, StatusService>();
 
 var app = builder.Build();
 
@@ -80,6 +82,21 @@ using (var scope = app.Services.CreateScope())
         var result = await userManager.CreateAsync(member, "Admin123!");
         if (result.Succeeded)
             await userManager.AddToRoleAsync(member, "Admin");
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var statusService = scope.ServiceProvider.GetRequiredService<IStatusService>();
+    string[] statusNames = { "Started", "Completed" };
+
+    foreach (var statusName in statusNames)
+    {
+        var exists = await statusService.ExistsAsync(statusName);
+        if (!exists.Succeeded)
+        {
+            await statusService.CreateStatusAsync(statusName);
+        }
     }
 }
 
