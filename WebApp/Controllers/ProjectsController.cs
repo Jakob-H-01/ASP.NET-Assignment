@@ -9,14 +9,17 @@ namespace WebApp.Controllers;
 
 [Authorize]
 [Route("projects")]
-public class ProjectsController(IProjectService projectService, IClientService clientService) : Controller
+public class ProjectsController(IProjectService projectService, IClientService clientService, IStatusService statusService) : Controller
 {
     private readonly IProjectService _projectService = projectService;
     private readonly IClientService _clientService = clientService;
+    private readonly IStatusService _statusService = statusService;
 
-    public async Task<IActionResult> Projects()
+    public async Task<IActionResult> Projects(string? status = null)
     {
-        var result = await _projectService.GetProjectsAsync();
+        var statusResponse = await _statusService.GetStatusByNameAsync(status!);
+        var result = status == null ? await _projectService.GetProjectsAsync() : await _projectService.GetProjectsAsync(x => x.StatusId == statusResponse.Result!.Id);
+        
         var projects = result.Result;
 
         var model = new ProjectsViewModel
@@ -24,6 +27,7 @@ public class ProjectsController(IProjectService projectService, IClientService c
             Projects = projects!
         };
 
+        ViewBag.CurrentStatus = status;
         return View(model);
     }
 

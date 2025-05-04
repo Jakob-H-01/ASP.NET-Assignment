@@ -5,12 +5,17 @@
 @{
     ViewData["Title"] = "Projects";
 
+    var status = ViewBag.CurrentStatus as string;
+
+    var allResponse = await projectService.GetProjectsAsync();
+    
     var startedStatus = await statusService.GetStatusByNameAsync("Started");
     var startedResponse = await projectService.GetProjectsAsync(x => x.StatusId == startedStatus.Result!.Id);    
 
     var completedStatus = await statusService.GetStatusByNameAsync("Completed");
     var completedResponse = await projectService.GetProjectsAsync(x => x.StatusId == completedStatus.Result!.Id);
 
+    var numberOfProjects = allResponse.Result!.Count();
     var numberOfStartedProjects = startedResponse.Result!.Count();
     var numberOfCompletedProjects = completedResponse.Result!.Count();
 }
@@ -21,9 +26,9 @@
 </header>
 <nav>
     <ul class="tab-links">
-        <li><a class="tab-link active" href="#">ALL [@Model.Projects.Count()]</a></li>
-        <li><a class="tab-link" href="#">STARTED [@numberOfStartedProjects]</a></li>
-        <li><a class="tab-link" href="#">COMPLETED [@numberOfCompletedProjects]</a></li>
+        <li><a class="tab-link @(status == null ? "active" : "")" href="?status=">ALL [@numberOfProjects]</a></li>
+        <li><a class="tab-link @(status == "Started" ? "active" : "")" href="?status=Started">STARTED [@numberOfStartedProjects]</a></li>
+        <li><a class="tab-link @(status == "Completed" ? "active" : "")" href="?status=Completed">COMPLETED [@numberOfCompletedProjects]</a></li>
     </ul>
 </nav>
 <section class="card-grid">
