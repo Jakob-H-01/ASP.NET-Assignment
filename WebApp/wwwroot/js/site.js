@@ -30,7 +30,7 @@ function toggleModal(modal, button) {
     modal.classList.toggle('hidden')
     const parent = button.closest('div')
     const parentId = `${parent.id}`
-    const id = parentId.split('member-')
+    const id = parentId.split('t-')
     idField.value = id[1]
 }
 

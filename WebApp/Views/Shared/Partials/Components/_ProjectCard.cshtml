@@ -1,0 +1,26 @@
+﻿@model Project
+
+<div class="card">
+    <div class="card-header">
+        <img src="~/images/project-logo.svg" alt="">
+        <div class="card-heading">
+            <h2 class="senary-heading">@Model.ProjectName</h2>
+            <p>GitLab Inc.</p>
+        </div>
+        <button class="btn-icon btn-more" data-type="toggle" data-target="#t-@Model.Id"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
+    </div>
+    <p>It is necessary to develop a website redesign in a corporate style.</p>
+    <div class="card-footer">
+        <p class="info-box"><i class="fa-solid fa-clock"></i><span>1 week left</span></p>
+        <img src="~/images/avatar-small-1.svg" alt="">
+        <img src="~/images/avatar-small-2.svg" alt="">
+    </div>
+    <div id="t-@Model.Id" class="card-dropdown dropdown hidden">
+        <button class="dropdown-option" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-pen"></i>Edit</button>
+        <button class="dropdown-option"><i class="fa-solid fa-user-plus"></i>Add Member</button>
+        <div class="divider-full"></div>
+        <form asp-action="DeleteProject" asp-controller="Projects" method="post" novalidate>
+            <button class="dropdown-option text-red" type="submit" name="id" value="@Model.Id"><i class="fa-solid fa-trash"></i>Delete Project</button>
+        </form>
+    </div>
+</div>

@@ -2,7 +2,6 @@
 using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
-using Data.Repositories;
 using Domain.Extensions;
 using Domain.Models;
 
@@ -36,5 +35,11 @@ public class ClientService(IClientRepository clientRepository) : IClientService
     {
         var result = await _clientRepository.GetAsync(x => x.Id == id);
         return result.MapTo<ServiceResult<Client>>();
+    }
+
+    public async Task<ServiceResult<bool>> ExistsAsync(string clientName)
+    {
+        var result = await _clientRepository.ExistsAsync(x => x.ClientName == clientName);
+        return result.MapTo<ServiceResult<bool>>();
     }
 }

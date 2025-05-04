@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using Business.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
@@ -62,6 +63,15 @@ public class ProjectsController(IProjectService projectService) : Controller
 
             return View("Projects", viewModel);
         }
+
+        return RedirectToAction("Projects");
+    }
+
+    [HttpPost]
+    [Route("delete")]
+    public async Task<IActionResult> DeleteProject(string id)
+    {
+        await _projectService.DeleteProjectAsync(id);
 
         return RedirectToAction("Projects");
     }

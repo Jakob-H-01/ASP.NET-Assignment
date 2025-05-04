@@ -60,47 +60,6 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
         return result.MapTo<ServiceResult<Member>>();
     }
 
-    public async Task<ServiceResult<bool>> SetMemberRoleAsync(string memberId, string roleName)
-    {
-        if (memberId == null || roleName == null)
-            return new ServiceResult<bool> { Succeeded = false, StatusCode = 400, Error = "Both memberId and roleName must be provided" };
-
-        if (!await _roleManager.RoleExistsAsync(roleName))
-            return new ServiceResult<bool> { Succeeded = false, StatusCode = 404, Error = "Role doesn't exist" };
-
-        var member = await _userManager.FindByIdAsync(memberId);
-        if (member == null)
-            return new ServiceResult<bool> { Succeeded = false, StatusCode = 404, Error = "Member doesn't exist" };
-
-        var memberRoles = await _userManager.GetRolesAsync(member);
-        if (memberRoles.Count > 0)
-        {
-            foreach (var role in memberRoles)
-            {
-                if (role != roleName)
-                    await _userManager.RemoveFromRoleAsync(member, role);                   
-            }
-        }
-
-        memberRoles = await _userManager.GetRolesAsync(member);
-        if (memberRoles.Count > 0)
-            return new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = "Unable to remove previous member role(s)" };
-
-        if (await _userManager.IsInRoleAsync(member, roleName))
-            return new ServiceResult<bool> { Succeeded = true, StatusCode = 200 };
-
-        var result = await _userManager.AddToRoleAsync(member, roleName);
-        return result.Succeeded
-            ? new ServiceResult<bool> { Succeeded = true, StatusCode = 200 }
-            : new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = "Unable to set member role" };
-    }
-
-    public async Task<ServiceResult<bool>> DeleteMemberAsync(string id)
-    {
-        var result = await _memberRepository.DeleteAsync(x => x.Id == id);
-        return result.MapTo<ServiceResult<bool>>();
-    }
-
     public async Task<ServiceResult<bool>> UpdateMemberAsync(MemberUpdateForm form, string roleName)
     {
         if (form == null)
@@ -131,5 +90,46 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
             Debug.WriteLine(ex.Message);
             return new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = ex.Message };
         }
+    }
+
+    public async Task<ServiceResult<bool>> DeleteMemberAsync(string id)
+    {
+        var result = await _memberRepository.DeleteAsync(x => x.Id == id);
+        return result.MapTo<ServiceResult<bool>>();
+    }
+
+    public async Task<ServiceResult<bool>> SetMemberRoleAsync(string memberId, string roleName)
+    {
+        if (memberId == null || roleName == null)
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 400, Error = "Both memberId and roleName must be provided" };
+
+        if (!await _roleManager.RoleExistsAsync(roleName))
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 404, Error = "Role doesn't exist" };
+
+        var member = await _userManager.FindByIdAsync(memberId);
+        if (member == null)
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 404, Error = "Member doesn't exist" };
+
+        var memberRoles = await _userManager.GetRolesAsync(member);
+        if (memberRoles.Count > 0)
+        {
+            foreach (var role in memberRoles)
+            {
+                if (role != roleName)
+                    await _userManager.RemoveFromRoleAsync(member, role);
+            }
+        }
+
+        memberRoles = await _userManager.GetRolesAsync(member);
+        if (memberRoles.Count > 0)
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = "Unable to remove previous member role(s)" };
+
+        if (await _userManager.IsInRoleAsync(member, roleName))
+            return new ServiceResult<bool> { Succeeded = true, StatusCode = 200 };
+
+        var result = await _userManager.AddToRoleAsync(member, roleName);
+        return result.Succeeded
+            ? new ServiceResult<bool> { Succeeded = true, StatusCode = 200 }
+            : new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = "Unable to set member role" };
     }
 }

@@ -4,7 +4,7 @@ namespace WebApp.Models;
 
 public class EditProjectViewModel
 {
-    public string? Id { get; set; }
+    public string Id { get; set; } = null!;
 
     public string? Image { get; set; }
 
@@ -35,5 +35,7 @@ public class EditProjectViewModel
     [DataType(DataType.Currency)]
     public decimal? Budget { get; set; }
 
-    public string? Status { get; set; }
+    [Display(Name = "Status")]
+    [Required(ErrorMessage = "Required")]
+    public string Status { get; set; } = null!;
 }

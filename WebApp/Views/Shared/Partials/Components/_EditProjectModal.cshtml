@@ -11,7 +11,7 @@
             <button class="btn-icon" data-type="modal" data-target="#edit-project"><i class="fa-solid fa-xmark fa-2xl"></i></button>
         </div>
         <form class="form" asp-action="EditProject" asp-controller="Projects" method="post" novalidate>
-            <input type="hidden" asp-for="Id" value="" />
+            <input type="hidden" data-value="id" asp-for="Id" value="" />
             <div class="image-previewer">
                 <div class="circle">
                     <i class="fa-solid fa-camera"></i>
@@ -80,6 +80,16 @@
                 <div class="field-container">
                     <input type="text" asp-for="Budget">
                     <span asp-validation-for="Budget"></span>
+                </div>
+            </div>
+            <div class="form-inner">
+                <label asp-for="Status"></label>
+                <div class="field-container">
+                    <select type="text" asp-for="Status">
+                        <option value="Started">STARTED</option>
+                        <option value="Completed">COMPLETED</option>
+                    </select>
+                    <span asp-validation-for="Status"></span>
                 </div>
             </div>
             <button class="btn btn-blue btn-form" type="submit">Save</button>

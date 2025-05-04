@@ -1,7 +1,7 @@
 ﻿@model Member
 
 <div class="card-2">
-    <button class="btn-icon btn-more" data-type="toggle" data-target="#member-@Model.Id"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
+    <button class="btn-icon btn-more" data-type="toggle" data-target="#t-@Model.Id"><i class="fa-solid fa-circle circle-icon"></i><i class="fa-solid fa-circle circle-icon"></i></button>
     <img src="~/images/avatar-large-1.svg" alt="">
     <div class="inner-container">
         <h2 class="quaternary-heading">@Model.FirstName @Model.LastName</h2>
@@ -12,7 +12,7 @@
         <p>@(Model.PhoneNumber != null ? Model.PhoneNumber : "Phone Number?")</p>
     </div>
     <button class="btn btn-gray">Message</button>
-    <div id="member-@Model.Id" class="card-dropdown dropdown hidden">
+    <div id="t-@Model.Id" class="card-dropdown dropdown hidden">
         <button class="dropdown-option" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-pen"></i>Edit</button>
         <div class="divider-full"></div>
         <form asp-action="DeleteMember" asp-controller="Admin" method="post" novalidate>

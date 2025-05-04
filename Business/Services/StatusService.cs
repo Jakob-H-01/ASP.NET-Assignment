@@ -31,9 +31,9 @@ public class StatusService(IStatusRepository statusRepository) : IStatusService
         return result.MapTo<ServiceResult<IEnumerable<Status>>>();
     }
 
-    public async Task<ServiceResult<Status>> GetStatusAsync(int id)
+    public async Task<ServiceResult<Status>> GetStatusByNameAsync(string statusName)
     {
-        var result = await _statusRepository.GetAsync(x => x.Id == id);
+        var result = await _statusRepository.GetAsync(x => x.StatusName == statusName);
         return result.MapTo<ServiceResult<Status>>();
     }
 
