@@ -1,7 +1,11 @@
 ﻿@model AddProjectViewModel
+@inject IMemberService memberService
 
 @{
     ViewData.TemplateInfo.HtmlFieldPrefix = "AddProject";
+
+    var response = await memberService.GetMembersAsync();
+    var members = response.Result;
 }
 
 <div id="create-project" class="overlay hidden">
@@ -62,10 +66,15 @@
                 </div>
             </div>
             <div class="form-inner">
-                <label asp-for="Member"></label>
+                <label asp-for="MemberId"></label>
                 <div class="field-container">
-                    <select asp-for="Member"></select>
-                    <span asp-validation-for="Member"></span>
+                    <select asp-for="MemberId">
+                        @foreach (var member in members!)
+                        {
+                            <option value="@member.Id">@member.FirstName @member.LastName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="MemberId"></span>
                     <div class="form-icon-container right">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>

@@ -22,14 +22,14 @@ public class EditProjectViewModel
     [Display(Name = "Start Date")]
     [DataType(DataType.Date)]
     [Required(ErrorMessage = "Required")]
-    public DateTime? StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
     [Display(Name = "End Date")]
     [DataType(DataType.Date)]
     public DateTime? EndDate { get; set; }
 
     [Display(Name = "Members")]
-    public string? Member { get; set; }
+    public string MemberId { get; set; } = null!;
 
     [Display(Name = "Budget", Prompt = "0")]
     [DataType(DataType.Currency)]
@@ -37,5 +37,5 @@ public class EditProjectViewModel
 
     [Display(Name = "Status")]
     [Required(ErrorMessage = "Required")]
-    public string Status { get; set; } = null!;
+    public int StatusId { get; set; }
 }

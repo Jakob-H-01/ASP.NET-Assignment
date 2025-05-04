@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
-using Business.Services;
+using Domain.Dtos;
+using Domain.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
@@ -8,9 +9,10 @@ namespace WebApp.Controllers;
 
 [Authorize]
 [Route("projects")]
-public class ProjectsController(IProjectService projectService) : Controller
+public class ProjectsController(IProjectService projectService, IClientService clientService) : Controller
 {
     private readonly IProjectService _projectService = projectService;
+    private readonly IClientService _clientService = clientService;
 
     public async Task<IActionResult> Projects()
     {
@@ -43,6 +45,19 @@ public class ProjectsController(IProjectService projectService) : Controller
             return View("Projects", viewModel);
         }
 
+        var projectForm = model.MapTo<ProjectCreationForm>();
+
+        var clientResult = await _clientService.GetClientByNameAsync(model.ClientName);
+        if (!clientResult.Succeeded)
+        {
+            await _clientService.CreateClientAsync(model.ClientName);
+            clientResult = await _clientService.GetClientByNameAsync(model.ClientName);
+        }
+
+        projectForm.ClientId = clientResult.Result!.Id;
+
+        await _projectService.CreateProjectAsync(projectForm);
+
         return RedirectToAction("Projects");
     }
 
@@ -63,6 +78,19 @@ public class ProjectsController(IProjectService projectService) : Controller
 
             return View("Projects", viewModel);
         }
+
+        var projectForm = model.MapTo<ProjectUpdateForm>();
+
+        var clientResult = await _clientService.GetClientByNameAsync(model.ClientName);
+        if (!clientResult.Succeeded)
+        {
+            await _clientService.CreateClientAsync(model.ClientName);
+            clientResult = await _clientService.GetClientByNameAsync(model.ClientName);
+        }
+
+        projectForm.ClientId = clientResult.Result!.Id;
+
+        await _projectService.UpdateProjectAsync(projectForm);
 
         return RedirectToAction("Projects");
     }

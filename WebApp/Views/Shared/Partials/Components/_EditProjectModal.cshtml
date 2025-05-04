@@ -1,7 +1,15 @@
 ﻿@model EditProjectViewModel
+@inject IMemberService memberService
+@inject IStatusService statusService
 
 @{
     ViewData.TemplateInfo.HtmlFieldPrefix = "EditProject";
+
+    var memberResponse = await memberService.GetMembersAsync();
+    var members = memberResponse.Result;
+    
+    var statusResponse = await statusService.GetAllStatusAsync();
+    var statuses = statusResponse.Result;
 }
 
 <div id="edit-project" class="overlay hidden">
@@ -63,10 +71,15 @@
                 </div>
             </div>
             <div class="form-inner">
-                <label asp-for="Member"></label>
+                <label asp-for="MemberId"></label>
                 <div class="field-container">
-                    <select asp-for="Member"></select>
-                    <span asp-validation-for="Member"></span>
+                    <select asp-for="MemberId">
+                        @foreach (var member in members!)
+                        {
+                            <option value="@member.Id">@member.FirstName @member.LastName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="MemberId"></span>
                     <div class="form-icon-container right">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
@@ -83,13 +96,15 @@
                 </div>
             </div>
             <div class="form-inner">
-                <label asp-for="Status"></label>
+                <label asp-for="StatusId"></label>
                 <div class="field-container">
-                    <select type="text" asp-for="Status">
-                        <option value="Started">STARTED</option>
-                        <option value="Completed">COMPLETED</option>
+                    <select type="text" asp-for="StatusId">
+                        @foreach (var status in statuses!)
+                        {
+                            <option value="@status.Id">@status.StatusName.ToUpper()</option>
+                        }
                     </select>
-                    <span asp-validation-for="Status"></span>
+                    <span asp-validation-for="StatusId"></span>
                 </div>
             </div>
             <button class="btn btn-blue btn-form" type="submit">Save</button>

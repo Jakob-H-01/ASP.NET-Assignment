@@ -20,14 +20,14 @@ public class AddProjectViewModel
     [Display(Name = "Start Date")]
     [DataType(DataType.Date)]
     [Required(ErrorMessage = "Required")]
-    public DateTime? StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
     [Display(Name = "End Date")]
     [DataType(DataType.Date)]
     public DateTime? EndDate { get; set; }
 
     [Display(Name = "Members")]
-    public string? Member { get; set; }
+    public string MemberId { get; set; } = null!;
 
     [Display(Name = "Budget", Prompt = "0")]
     [DataType(DataType.Currency)]
