@@ -94,6 +94,16 @@ public class AdminController(IMemberService memberService) : Controller
             return View("TeamMembers", viewModel);
         }
 
+        var memberForm = model.MapTo<MemberUpdateForm>();
+
+        if (model.Day != null && model.Month != null && model.Year != null)
+        {
+            var dateOfBirth = new DateTime((int)model.Year, (int)model.Month, (int)model.Day);
+            memberForm.DateOfBirth = dateOfBirth;
+        }
+
+        await _memberService.UpdateMemberAsync(memberForm, model.RoleName);
+
         return RedirectToAction("TeamMembers");
     }
     

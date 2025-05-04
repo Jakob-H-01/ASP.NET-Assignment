@@ -100,4 +100,36 @@ public class MemberService(IMemberRepository memberRepository, UserManager<Membe
         var result = await _memberRepository.DeleteAsync(x => x.Id == id);
         return result.MapTo<ServiceResult<bool>>();
     }
+
+    public async Task<ServiceResult<bool>> UpdateMemberAsync(MemberUpdateForm form, string roleName)
+    {
+        if (form == null)
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 400, Error = "Form can't be null" };
+
+        try
+        {
+            var memberResult = await _memberRepository.GetEntityAsync(x => x.Id == form.Id);
+            if (!memberResult.Succeeded)
+                return new ServiceResult<bool> { Succeeded = false, StatusCode = 404, Error = "Member doesn't exist" };
+
+            var memberEntity = memberResult.Result;
+            memberEntity.MapFrom(form);
+
+            var result = await _memberRepository.UpdateAsync(memberEntity!);
+            if (result.Succeeded)
+            {
+                var setRoleResult = await SetMemberRoleAsync(memberEntity!.Id, roleName);
+                return setRoleResult.Succeeded
+                    ? new ServiceResult<bool> { Succeeded = true, StatusCode = 200 }
+                    : new ServiceResult<bool> { Succeeded = false, StatusCode = 200, Error = "Member updated but not added to role" };
+            }
+
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = "Unable to update member" };
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return new ServiceResult<bool> { Succeeded = false, StatusCode = 500, Error = ex.Message };
+        }
+    }
 }

@@ -73,6 +73,21 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         var result = entity.MapTo<TModel>();
         return new RepositoryResult<TModel> { Succeeded = true, StatusCode = 200, Result = result };
     }
+    
+    public virtual async Task<RepositoryResult<TEntity>> GetEntityAsync(Expression<Func<TEntity, bool>> findBy, params Expression<Func<TEntity, object>>[] include)
+    {
+        IQueryable<TEntity> query = _table;
+
+        if (include != null && include.Length > 0)
+            foreach (var item in include)
+                query = query.Include(item);
+
+        var entity = await query.FirstOrDefaultAsync(findBy);
+        if (entity == null)
+            return new RepositoryResult<TEntity> { Succeeded = false, StatusCode = 404, Error = "Entity not found" };
+
+        return new RepositoryResult<TEntity> { Succeeded = true, StatusCode = 200, Result = entity };
+    }
 
     public virtual async Task<RepositoryResult<bool>> UpdateAsync(TEntity entity)
     {

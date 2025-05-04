@@ -11,4 +11,5 @@ public interface IMemberService
     Task<ServiceResult<Member>> GetMemberAsync(string id);
     Task<ServiceResult<IEnumerable<Member>>> GetMembersAsync();
     Task<ServiceResult<bool>> SetMemberRoleAsync(string memberId, string roleName);
+    Task<ServiceResult<bool>> UpdateMemberAsync(MemberUpdateForm form, string roleName);
 }

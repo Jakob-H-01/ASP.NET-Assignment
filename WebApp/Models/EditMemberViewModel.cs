@@ -4,7 +4,7 @@ namespace WebApp.Models;
 
 public class EditMemberViewModel
 {
-    public string? Id { get; set; }
+    public string Id { get; set; } = null!;
     public string? Image { get; set; }
 
     [Display(Name = "First Name", Prompt = "Your first name")]
@@ -32,11 +32,15 @@ public class EditMemberViewModel
     public string? Address { get; set; }
 
     [Display(Name = "Day", Prompt = "Day")]
-    public string? Day { get; set; }
+    public int? Day { get; set; }
 
     [Display(Name = "Month", Prompt = "Month")]
-    public string? Month { get; set; }
+    public int? Month { get; set; }
 
     [Display(Name = "Year", Prompt = "Year")]
-    public string? Year { get; set; }
+    public int? Year { get; set; }
+
+    [Display(Name = "Role")]
+    [Required(ErrorMessage = "Required")]
+    public string RoleName { get; set; } = null!;
 }

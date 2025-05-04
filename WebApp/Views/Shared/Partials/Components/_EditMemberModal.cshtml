@@ -11,7 +11,7 @@
             <button class="btn-icon" data-type="modal" data-target="#edit-member"><i class="fa-solid fa-xmark fa-2xl"></i></button>
         </div>
         <form class="form" asp-action="EditMember" asp-controller="Admin" method="post" novalidate>
-            <input type="hidden" asp-for="Id" value="" />
+            <input type="hidden" data-value="id" asp-for="Id" value="" />
             <div class="image-previewer circle">
                 <div class="circle">
                     <i class="fa-solid fa-camera"></i>
@@ -83,6 +83,16 @@
                     </div>
                 </div>
             </fieldset>
+            <div class="form-inner">
+                <label asp-for="RoleName"></label>
+                <div class="field-container">
+                    <select type="text" asp-for="RoleName">
+                        <option value="Standard">Standard</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <span asp-validation-for="RoleName"></span>
+                </div>
+            </div>
             <button class="btn btn-blue btn-form" type="submit">Save</button>
         </form>
     </div>

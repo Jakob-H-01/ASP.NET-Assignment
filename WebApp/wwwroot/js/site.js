@@ -7,6 +7,7 @@ toggleButtons.forEach(button => {
 const modalButtons = document.querySelectorAll('[data-type="modal"]')
 const darkModeSwitch = document.querySelector('#dark-mode-switch')
 const darkModeInput = document.querySelector('#dark-mode-input')
+const idField = document.querySelector('input[data-value="id"]')
 
 function toggleDropdown(element, targetView) {
     views.forEach(view => {
@@ -25,8 +26,12 @@ function toggleDropdown(element, targetView) {
     element.classList.toggle('active')
 }
 
-function toggleModal(modal) {
+function toggleModal(modal, button) {
     modal.classList.toggle('hidden')
+    const parent = button.closest('div')
+    const parentId = `${parent.id}`
+    const id = parentId.split('member-')
+    idField.value = id[1]
 }
 
 function toggleDarkMode() {
@@ -66,7 +71,7 @@ toggleButtons.forEach(button => {
 })
 modalButtons.forEach(button => {
     const targetModal = document.querySelector(button.dataset.target)
-    button.addEventListener('click', () => toggleModal(targetModal))
+    button.addEventListener('click', () => toggleModal(targetModal, button))
 })
 darkModeSwitch?.addEventListener('click', toggleDarkMode)
 
